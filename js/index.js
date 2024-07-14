@@ -26,8 +26,8 @@ document.addEventListener('deviceready', function() {
 
     function preload() {
         this.load.spritesheet('player', 'img/spritesheet/player_movement.png', {
-            frameWidth: 48,  // Adjust to actual width of each frame
-            frameHeight: 48 // Adjust to actual height of each frame
+            frameWidth: 48,
+            frameHeight: 48
         });
     }
 
@@ -51,14 +51,14 @@ document.addEventListener('deviceready', function() {
         });
 
         this.anims.create({
-            key: 'moveWest',
+            key: 'moveEast',
             frames: this.anims.generateFrameNumbers('player', { start: 8, end: 11 }),
             frameRate: 10,
             repeat: -1
         });
 
         this.anims.create({
-            key: 'moveEast',
+            key: 'moveWest',
             frames: this.anims.generateFrameNumbers('player', { start: 12, end: 15 }),
             frameRate: 10,
             repeat: -1
