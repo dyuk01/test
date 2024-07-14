@@ -29,9 +29,11 @@ document.addEventListener('deviceready', function() {
             frameWidth: 48,
             frameHeight: 48
         });
+        console.log("Spritesheet loaded");
     }
 
     function create() {
+        this.add.text(100, 100, 'Hello Phaser!', { font: '40px Arial', fill: '#ffffff' });
         player = this.physics.add.sprite(400, 300, 'player');
         player.setCollideWorldBounds(true);
 
