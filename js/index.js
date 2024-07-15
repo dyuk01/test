@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
         player = this.physics.add.sprite(400, 300, 'player');
         player.setCollideWorldBounds(true);
 
-        // Create animations based on the provided spritesheet
         this.anims.create({
             key: 'moveSouth',
             frames: this.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
@@ -54,20 +53,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         this.anims.create({
-            key: 'moveEast',
+            key: 'moveWest',
             frames: this.anims.generateFrameNumbers('player', { start: 8, end: 11 }),
             frameRate: 10,
             repeat: -1
         });
 
         this.anims.create({
-            key: 'moveWest',
+            key: 'moveEast',
             frames: this.anims.generateFrameNumbers('player', { start: 12, end: 15 }),
             frameRate: 10,
             repeat: -1
         });
 
-        // Set up WASD input
         cursors = this.input.keyboard.addKeys({
             up: Phaser.Input.Keyboard.KeyCodes.W,
             down: Phaser.Input.Keyboard.KeyCodes.S,
