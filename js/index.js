@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var config = {
         type: Phaser.AUTO,
         parent: 'game',
-        width: 800,
-        height: 600,
+        width: window.innerWidth,
+        height: window.innerHeight,
         scene: {
             preload: preload,
             create: create,
