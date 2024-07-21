@@ -52,10 +52,22 @@ document.addEventListener('DOMContentLoaded', function() {
         this.load.image('tile_tree', 'asset/map/tileset/tree.png');
         this.load.image('tile_water', 'asset/map/tileset/water.png');
         this.load.image('tile_rock', 'asset/map/tileset/rock.png'); 
+        this.load.spritesheet('water', 'asset/map/tileset/water.png', {
+            frameWidth: 16,
+            frameHeight: 16
+        });
     }
 
     function create() {
         console.log("create");
+
+        var numberOfFrames = 4; 
+        this.anims.create({
+            key: 'water_animation',
+            frames: this.anims.generateFrameNumbers('water', { start: 0, end: numberOfFrames - 1 }),
+            frameRate: 10,
+            repeat: -1
+        });
 
         try {
             map = this.make.tilemap({ key: 'map' });
@@ -137,16 +149,6 @@ document.addEventListener('DOMContentLoaded', function() {
             player.setCollideWorldBounds(true);
             console.log("Player created:", player);
 
-            // Enable collision between the player and the layers
-            // Object.values(layers).forEach(layer => {
-            //     if (layer) {
-            //         this.physics.add.collider(player, layer);
-            //         console.log("Collider added for layer:", layer);
-            //     } else {
-            //         console.log("Layer is undefined:", layer);
-            //     }
-            // });
-
             // Create player animations
             this.anims.create({
                 key: 'moveSouth',
@@ -183,19 +185,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 left: Phaser.Input.Keyboard.KeyCodes.A,
                 right: Phaser.Input.Keyboard.KeyCodes.D
             });
-            console.log("Cursors set up:", cursors);
 
             // Set up the camera to follow the player and zoom in
             this.cameras.main.startFollow(player);
             this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-            this.cameras.main.setZoom(2);  // Adjust the zoom level as needed
+            this.cameras.main.setZoom(3);  // Adjust the zoom level as needed
 
             // Center the camera viewport within the canvas
-            var viewportWidth = 800;  // Width of the camera viewport
-            var viewportHeight = 600; // Height of the camera viewport
-            var xOffset = (config.width - viewportWidth) / 2;
-            var yOffset = (config.height - viewportHeight) / 2;
-            this.cameras.main.setViewport(xOffset, yOffset, viewportWidth, viewportHeight);
+            var viewportWidth = config.width;
+            var viewportHeight = config.height;
+            this.cameras.main.setViewport(0, 0, viewportWidth, viewportHeight);
 
         } catch (error) {
             console.error("An error occurred during create:", error);
@@ -203,6 +202,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function update() {
+        water.anims.play('water_animation', true);
+
         player.setVelocity(0);
 
         if (cursors.left.isDown) {
