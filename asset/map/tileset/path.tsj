@@ -3,7 +3,7 @@
  "imageheight":64,
  "imagewidth":64,
  "margin":0,
- "name":"Paths",
+ "name":"path",
  "spacing":0,
  "tilecount":16,
  "tiledversion":"1.11.0",

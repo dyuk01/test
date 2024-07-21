@@ -3,7 +3,7 @@
  "imageheight":80,
  "imagewidth":144,
  "margin":0,
- "name":"Basic_Grass_Biom_things",
+ "name":"tree",
  "spacing":0,
  "tilecount":45,
  "tiledversion":"1.11.0",
@@ -14,7 +14,6 @@
          "objectgroup":
             {
              "draworder":"index",
-             "id":2,
              "name":"",
              "objects":[
                     {
@@ -51,7 +50,6 @@
          "objectgroup":
             {
              "draworder":"index",
-             "id":2,
              "name":"",
              "objects":[
                     {
@@ -88,7 +86,6 @@
          "objectgroup":
             {
              "draworder":"index",
-             "id":2,
              "name":"",
              "objects":[
                     {
@@ -125,7 +122,6 @@
          "objectgroup":
             {
              "draworder":"index",
-             "id":3,
              "name":"",
              "objects":[
                     {
@@ -162,7 +158,6 @@
          "objectgroup":
             {
              "draworder":"index",
-             "id":2,
              "name":"",
              "objects":[
                     {
