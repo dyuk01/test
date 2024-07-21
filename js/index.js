@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var config = {
         type: Phaser.AUTO,
         parent: 'game',
-        width: 800,
-        height: 600,
+        width: 1600,
+        height: 1200,
         scene: {
             preload: preload,
             create: create,
@@ -17,6 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 gravity: { y: 0 },
                 debug: false
             }
+        },
+        scale: {
+            mode: Phaser.Scale.RESIZE,
+            autoCenter: Phaser.Scale.CENTER_BOTH
         }
     };
 
@@ -180,6 +184,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 right: Phaser.Input.Keyboard.KeyCodes.D
             });
             console.log("Cursors set up:", cursors);
+
+            // Set up the camera to follow the player
+            this.cameras.main.startFollow(player);
+            this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+            console.log("Camera set to follow player and bounds set:", this.cameras.main);
+
         } catch (error) {
             console.error("An error occurred during create:", error);
         }
