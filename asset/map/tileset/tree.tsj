@@ -1,5 +1,5 @@
 { "columns":9,
- "image":"../tileset/json/tree.png",
+ "image":"tree.png",
  "imageheight":80,
  "imagewidth":144,
  "margin":0,

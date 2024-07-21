@@ -1,5 +1,5 @@
 { "columns":4,
- "image":"../tileset/json/water.png",
+ "image":"water.png",
  "imageheight":16,
  "imagewidth":64,
  "margin":0,

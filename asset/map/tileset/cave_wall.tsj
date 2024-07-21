@@ -1,5 +1,5 @@
 { "columns":11,
- "image":"../tileset/json/cave_wall.png",
+ "image":"cave_wall.png",
  "imageheight":80,
  "imagewidth":176,
  "margin":0,

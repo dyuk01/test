@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
             frameHeight: 48
         });
         
-        // Load the Tiled map JSON
-        this.load.tilemapTiledJSON('map', 'asset/map/main_map.tmj');
+        // Load the Tiled map tileset
+        this.load.tilemapTiledtileset('map', 'asset/map/main_map.tmj');
         
         // Load all tileset images used in the map
         this.load.image('tile_cave_floor', 'asset/tileset/png/cave_floor.png');

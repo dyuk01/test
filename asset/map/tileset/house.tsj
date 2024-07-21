@@ -1,5 +1,5 @@
 { "columns":7,
- "image":"../tileset/json/house.png",
+ "image":"house.png",
  "imageheight":80,
  "imagewidth":112,
  "margin":0,

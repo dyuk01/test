@@ -1,5 +1,5 @@
 { "columns":24,
- "image":"../tileset/json/rocks.png",
+ "image":"rock.png",
  "imageheight":336,
  "imagewidth":384,
  "margin":0,
