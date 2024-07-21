@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var config = {
         type: Phaser.AUTO,
         parent: 'game',
-        width: 1600,
-        height: 1200,
+        width: 800,
+        height: 600,
         scene: {
             preload: preload,
             create: create,
@@ -138,14 +138,14 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log("Player created:", player);
 
             // Enable collision between the player and the layers
-            Object.values(layers).forEach(layer => {
-                if (layer) {
-                    this.physics.add.collider(player, layer);
-                    console.log("Collider added for layer:", layer);
-                } else {
-                    console.log("Layer is undefined:", layer);
-                }
-            });
+            // Object.values(layers).forEach(layer => {
+            //     if (layer) {
+            //         this.physics.add.collider(player, layer);
+            //         console.log("Collider added for layer:", layer);
+            //     } else {
+            //         console.log("Layer is undefined:", layer);
+            //     }
+            // });
 
             // Create player animations
             this.anims.create({
@@ -185,10 +185,17 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             console.log("Cursors set up:", cursors);
 
-            // Set up the camera to follow the player
+            // Set up the camera to follow the player and zoom in
             this.cameras.main.startFollow(player);
             this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-            console.log("Camera set to follow player and bounds set:", this.cameras.main);
+            this.cameras.main.setZoom(2);  // Adjust the zoom level as needed
+
+            // Center the camera viewport within the canvas
+            var viewportWidth = 800;  // Width of the camera viewport
+            var viewportHeight = 600; // Height of the camera viewport
+            var xOffset = (config.width - viewportWidth) / 2;
+            var yOffset = (config.height - viewportHeight) / 2;
+            this.cameras.main.setViewport(xOffset, yOffset, viewportWidth, viewportHeight);
 
         } catch (error) {
             console.error("An error occurred during create:", error);
@@ -199,16 +206,16 @@ document.addEventListener('DOMContentLoaded', function() {
         player.setVelocity(0);
 
         if (cursors.left.isDown) {
-            player.setVelocityX(-160);
+            player.setVelocityX(-100);
             player.anims.play('moveWest', true);
         } else if (cursors.right.isDown) {
-            player.setVelocityX(160);
+            player.setVelocityX(100);
             player.anims.play('moveEast', true);
         } else if (cursors.up.isDown) {
-            player.setVelocityY(-160);
+            player.setVelocityY(-100);
             player.anims.play('moveNorth', true);
         } else if (cursors.down.isDown) {
-            player.setVelocityY(160);
+            player.setVelocityY(100);
             player.anims.play('moveSouth', true);
         } else {
             player.anims.stop();
