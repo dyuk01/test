@@ -1,5 +1,5 @@
 { "columns":9,
- "image":"..\/..\/..\/Downloads\/Sprout Lands - Sprites - Basic pack\/Objects\/Basic_Furniture.png",
+ "image":"../tileset/json/furniture.png",
  "imageheight":96,
  "imagewidth":144,
  "margin":0,

@@ -1,5 +1,5 @@
 { "columns":4,
- "image":"..\/..\/..\/..\/..\/..\/Downloads\/Sprout Lands - Sprites - Basic pack\/Objects\/Paths.png",
+ "image":"../tileset/json/path.png",
  "imageheight":64,
  "imagewidth":64,
  "margin":0,

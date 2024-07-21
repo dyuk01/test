@@ -4,7 +4,7 @@
      "export":
         {
          "format":"json",
-         "target":"..\/..\/..\/..\/..\/Desktop\/map\/tileset\/main_map.json"
+         "target":"../asset/map/main_map.json"
         }
     },
  "height":50,

@@ -1,5 +1,5 @@
 { "columns":12,
- "image":"..\/..\/..\/..\/..\/..\/Downloads\/Ninja Adventure - Asset Pack\/Backgrounds\/Tilesets\/TilesetReliefDetail.png",
+ "image":"../tileset/json/cave_ladder.png",
  "imageheight":192,
  "imagewidth":192,
  "margin":0,

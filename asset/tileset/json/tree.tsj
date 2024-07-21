@@ -1,5 +1,5 @@
 { "columns":9,
- "image":"..\/..\/..\/..\/..\/..\/Downloads\/Sprout Lands - Sprites - Basic pack\/Objects\/Basic_Grass_Biom_things.png",
+ "image":"../tileset/json/tree.png",
  "imageheight":80,
  "imagewidth":144,
  "margin":0,

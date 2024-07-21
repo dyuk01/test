@@ -1,5 +1,5 @@
 { "columns":7,
- "image":"..\/..\/..\/..\/..\/..\/Downloads\/Sprout Lands - Sprites - Basic pack\/Tilesets\/Wooden House.png",
+ "image":"../tileset/json/house.png",
  "imageheight":80,
  "imagewidth":112,
  "margin":0,

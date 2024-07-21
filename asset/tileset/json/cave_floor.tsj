@@ -1,5 +1,5 @@
 { "columns":18,
- "image":"..\/..\/..\/..\/..\/..\/Downloads\/tilesets_edit\/6_floors.png",
+ "image":"../tileset/json/cave_floor.png",
  "imageheight":224,
  "imagewidth":288,
  "margin":0,

@@ -1,5 +1,5 @@
 { "columns":11,
- "image":"..\/..\/..\/..\/..\/..\/Downloads\/Sprout Lands - Sprites - Basic pack\/Tilesets\/Hills.png",
+ "image":"../tileset/json/hills.png",
  "imageheight":112,
  "imagewidth":176,
  "margin":0,
