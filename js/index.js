@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
             default: 'arcade',
             arcade: {
                 gravity: { y: 0 },
-                debug: false
+                debug: true // Enable debug mode to visualize collisions
             }
         },
         scale: {
@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var cursors;
     var map;
     var layers = {};
+    var debugGraphics;
 
     function preload() {
         console.log("preload");
@@ -52,22 +53,10 @@ document.addEventListener('DOMContentLoaded', function() {
         this.load.image('tile_tree', 'asset/map/tileset/tree.png');
         this.load.image('tile_water', 'asset/map/tileset/water.png');
         this.load.image('tile_rock', 'asset/map/tileset/rock.png'); 
-        this.load.spritesheet('water', 'asset/map/tileset/water.png', {
-            frameWidth: 16,
-            frameHeight: 16
-        });
     }
 
     function create() {
         console.log("create");
-
-        var numberOfFrames = 4; 
-        this.anims.create({
-            key: 'water_animation',
-            frames: this.anims.generateFrameNumbers('water', { start: 0, end: numberOfFrames - 1 }),
-            frameRate: 10,
-            repeat: -1
-        });
 
         try {
             map = this.make.tilemap({ key: 'map' });
@@ -134,20 +123,26 @@ document.addEventListener('DOMContentLoaded', function() {
             layers['furniture'] = map.createLayer('furniture', [furnitureTileset], 0, 0);
             console.log("Furniture layer created:", layers['furniture']);
 
-            // Set collisions for layers if needed
-            Object.values(layers).forEach(layer => {
-                if (layer) {
-                    layer.setCollisionByExclusion([-1]);
-                    console.log("Collision set for layer:", layer);
-                } else {
-                    console.log("Layer is undefined:", layer);
-                }
+            // Set collisions for the land layer
+            layers['land'].setCollisionByExclusion([-1]);
+            console.log("Collision set for land layer:", layers['land']);
+
+            // Create debug graphics to visualize collision
+            debugGraphics = this.add.graphics();
+            map.renderDebug(debugGraphics, {
+                tileColor: null, // Color of non-colliding tiles
+                collidingTileColor: new Phaser.Display.Color(255, 0, 0, 100), // Color of colliding tiles
+                faceColor: new Phaser.Display.Color(0, 255, 0, 255) // Color of colliding face edges
             });
 
             // Create the player
-            player = this.physics.add.sprite(400, 300, 'player');
+            player = this.physics.add.sprite(370, 430, 'player');
             player.setCollideWorldBounds(true);
             console.log("Player created:", player);
+
+            // Enable collision between the player and the land layer
+            this.physics.add.collider(player, layers['land']);
+            console.log("Collider added for land layer:", layers['land']);
 
             // Create player animations
             this.anims.create({
@@ -202,8 +197,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function update() {
-        water.anims.play('water_animation', true);
-
         player.setVelocity(0);
 
         if (cursors.left.isDown) {
