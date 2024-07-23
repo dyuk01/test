@@ -1,0 +1,91 @@
+{
+    "section1": {
+        "files": [
+            {
+                "url": "asset/map/tileset/cave_floor.png",
+                "type": "image",
+                "key": "cave_floor"
+            },
+            {
+                "url": "asset/map/tileset/cave_ladder.png",
+                "type": "image",
+                "key": "cave_ladder"
+            },
+            {
+                "url": "asset/map/tileset/cave_wall.png",
+                "type": "image",
+                "key": "cave_wall"
+            },
+            {
+                "url": "assets/dino.png",
+                "key": "dino",
+                "type": "image"
+            },
+            {
+                "url": "asset/map/tileset/farm.png",
+                "type": "image",
+                "key": "farm"
+            },
+            {
+                "url": "asset/map/tileset/furniture.png",
+                "type": "image",
+                "key": "furniture"
+            },
+            {
+                "url": "asset/map/tileset/grass.png",
+                "type": "image",
+                "key": "grass"
+            },
+            {
+                "url": "asset/map/tileset/hills.png",
+                "type": "image",
+                "key": "hills"
+            },
+            {
+                "url": "asset/map/tileset/house.png",
+                "type": "image",
+                "key": "house"
+            },
+            {
+                "url": "asset/map/tileset/path.png",
+                "type": "image",
+                "key": "path"
+            },
+            {
+                "url": "img/spritesheet/player_movement.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "player_movement"
+            },
+            {
+                "url": "asset/map/tileset/rock.png",
+                "type": "image",
+                "key": "rock"
+            },
+            {
+                "url": "asset/map/tileset/tree.png",
+                "type": "image",
+                "key": "tree"
+            },
+            {
+                "url": "asset/map/tileset/water.png",
+                "type": "image",
+                "key": "water"
+            }
+        ]
+    },
+    "meta": {
+        "app": "Phaser Editor 2D - Asset Pack Editor",
+        "contentType": "phasereditor2d.pack.core.AssetContentType",
+        "url": "https://phasereditor2d.com",
+        "version": 2,
+        "showAllFilesInBlocks": false
+    }
+}

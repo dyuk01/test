@@ -122,12 +122,8 @@ document.addEventListener('DOMContentLoaded', function() {
             layers['furniture'] = map.createLayer('furniture', [furnitureTileset], 0, 0);
             console.log("Furniture layer created:", layers['furniture']);
 
-
-            layers['land'].setCollisionByExclusion([-1]);
-
             // Create the player
             player = this.physics.add.sprite(370, 430, 'player');
-            player.setCollideWorldBounds(true);
             console.log("Player created:", player);
 
             this.physics.add.collider(player, layers['land']);
