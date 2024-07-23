@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
             default: 'arcade',
             arcade: {
                 gravity: { y: 0 },
-                debug: true // Enable debug mode to visualize collisions
+                debug: false
             }
         },
         scale: {
@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var cursors;
     var map;
     var layers = {};
-    var debugGraphics;
 
     function preload() {
         console.log("preload");
@@ -123,26 +122,16 @@ document.addEventListener('DOMContentLoaded', function() {
             layers['furniture'] = map.createLayer('furniture', [furnitureTileset], 0, 0);
             console.log("Furniture layer created:", layers['furniture']);
 
-            // Set collisions for the land layer
-            layers['land'].setCollisionByExclusion([-1]);
-            console.log("Collision set for land layer:", layers['land']);
 
-            // Create debug graphics to visualize collision
-            debugGraphics = this.add.graphics();
-            map.renderDebug(debugGraphics, {
-                tileColor: null, // Color of non-colliding tiles
-                collidingTileColor: new Phaser.Display.Color(255, 0, 0, 100), // Color of colliding tiles
-                faceColor: new Phaser.Display.Color(0, 255, 0, 255) // Color of colliding face edges
-            });
+            layers['land'].setCollisionByExclusion([-1]);
 
             // Create the player
             player = this.physics.add.sprite(370, 430, 'player');
             player.setCollideWorldBounds(true);
             console.log("Player created:", player);
-
-            // Enable collision between the player and the land layer
+            
             this.physics.add.collider(player, layers['land']);
-            console.log("Collider added for land layer:", layers['land']);
+
 
             // Create player animations
             this.anims.create({
