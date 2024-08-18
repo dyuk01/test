@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
             frameWidth: 48,
             frameHeight: 48
         });
+        
 
         this.load.tilemapTiledJSON('map', 'asset/map/main_map.tmj');
 
@@ -117,10 +118,35 @@ document.addEventListener('DOMContentLoaded', function() {
             layers['furniture'] = map.createLayer('furniture', [furnitureTileset], 0, 0);
             console.log("Furniture layer created:", layers['furniture']);
 
+            layers['land'].setCollisionByProperty({ collides: true });
+            layers['house_wall'].setCollisionByProperty({ collides: true });
+            layers['trees'].setCollisionByProperty({ collides: true });
+            layers['mine'].setCollisionByProperty({ collides: true });
+            layers['furniture'].setCollisionByProperty({ collides: true });
+
+
             // Create the player
             player = this.physics.add.sprite(370, 430, 'player');
             player.setCollideWorldBounds(true);
             console.log("Player created:", player);
+
+            this.physics.add.collider(player, layers['land']);
+            this.physics.add.collider(player, layers['house_wall']);
+            this.physics.add.collider(player, layers['trees']);
+            this.physics.add.collider(player, layers['mine']);
+            this.physics.add.collider(player, layers['furniture']);
+
+            const objectLayer = map.getObjectLayer('Objects');
+            if (objectLayer) {
+                objectLayer.objects.forEach(function(object) {
+                    const { x, y, width, height } = object;
+                    const shape = this.add.rectangle(x + width / 2, y + height / 2, width, height);
+                    this.physics.world.enable(shape, Phaser.Physics.Arcade.STATIC_BODY);
+                    shape.body.setOffset(-width / 2, -height / 2);  // Align the shape correctly
+                    this.physics.add.collider(player, shape);
+                }, this);
+            }
+
 
             // Create player animations
             this.anims.create({
