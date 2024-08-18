@@ -132,6 +132,13 @@ document.addEventListener('DOMContentLoaded', function() {
             // Create the player
             player = this.physics.add.sprite(370, 430, 'player');
             player.setCollideWorldBounds(true);
+
+            // Reduce the width and height to match the visible character
+            player.body.setSize(player.width * 0.5, player.height * 0.8); 
+
+            // Adjust the offset to center the collision box on the sprite
+            player.body.setOffset(player.width * 0.25, player.height * 0.1);
+            
             console.log("Player created:", player);
 
             const obstaclesLayer = map.getObjectLayer('obstacles');
@@ -144,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     obstacle.body.setSize(width, height);
                     obstacle.body.setOffset(0, 0);
-                    
+
                     this.physics.add.collider(player, obstacle);
     
                     // Visualize the collision rectangles
