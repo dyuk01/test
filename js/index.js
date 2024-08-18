@@ -138,15 +138,19 @@ document.addEventListener('DOMContentLoaded', function() {
             if (obstaclesLayer) {
                 obstaclesLayer.objects.forEach(function(object) {
                     const { x, y, width, height } = object;
-
-                    // Create a static body for each rectangle in the obstacles layer
-                    const obstacle = this.add.rectangle(x + width / 2, y + height / 2, width, height);
+    
+                    const obstacle = this.add.rectangle(x + width / 2, y + height / 2, width, height, 0xff0000, 0.5);
                     this.physics.world.enable(obstacle, Phaser.Physics.Arcade.STATIC_BODY);
-                    obstacle.body.setOffset(-width / 2, -height / 2);  // Adjust position to match Tiled's coordinates
+                    obstacle.body.setOffset(-width / 2, -height / 2);
                     this.physics.add.collider(player, obstacle);
+    
+                    // Visualize the collision rectangles
+                    this.add.graphics()
+                        .lineStyle(2, 0xff0000, 1)
+                        .strokeRect(x, y, width, height);
                 }, this);
             }
-
+            
             // Create player animations
             this.anims.create({
                 key: 'moveSouth',
