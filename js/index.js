@@ -30,6 +30,17 @@ document.addEventListener('DOMContentLoaded', function() {
     var map;
     var layers = {};
 
+    // Audio context handling
+    let audioContext;
+
+    function resumeAudioContext() {
+        if (audioContext.state === 'suspended') {
+            audioContext.resume().then(() => {
+                console.log('AudioContext resumed');
+            });
+        }
+    }
+
     function preload() {
         console.log("preload");
 
@@ -146,7 +157,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     this.physics.add.collider(player, shape);
                 }, this);
             }
-
 
             // Create player animations
             this.anims.create({
