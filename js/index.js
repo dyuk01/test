@@ -129,13 +129,6 @@ document.addEventListener('DOMContentLoaded', function() {
             layers['furniture'] = map.createLayer('furniture', [furnitureTileset], 0, 0);
             console.log("Furniture layer created:", layers['furniture']);
 
-            layers['land'].setCollisionByProperty({ collides: true });
-            layers['house_wall'].setCollisionByProperty({ collides: true });
-            layers['trees'].setCollisionByProperty({ collides: true });
-            layers['mine'].setCollisionByProperty({ collides: true });
-            layers['furniture'].setCollisionByProperty({ collides: true });
-
-
             // Create the player
             player = this.physics.add.sprite(370, 430, 'player');
             player.setCollideWorldBounds(true);
