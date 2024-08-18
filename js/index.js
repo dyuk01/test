@@ -136,8 +136,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Reduce the width and height to match the visible character
             player.body.setSize(player.width * 0.2, player.height * 0.2); 
 
-            // // Adjust the offset to center the collision box on the sprite
-            // player.body.setOffset(player.width * 0.25, player.height * 0.1);
+            // Adjust the offset to center the collision box on the sprite
+            player.body.setOffset(0, player.height * 0.05);
             
             console.log("Player created:", player);
 
