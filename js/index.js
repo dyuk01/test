@@ -139,9 +139,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 obstaclesLayer.objects.forEach(function(object) {
                     const { x, y, width, height } = object;
     
-                    const obstacle = this.add.rectangle(x + width / 2, y + height / 2, width, height, 0xff0000, 0.5);
+                    const obstacle = this.add.rectangle(x, y, width, height);
                     this.physics.world.enable(obstacle, Phaser.Physics.Arcade.STATIC_BODY);
-                    obstacle.body.setOffset(-width / 2, -height / 2);
+
+                    obstacle.body.setSize(width, height);
+                    obstacle.body.setOffset(0, 0);
+                    
                     this.physics.add.collider(player, obstacle);
     
                     // Visualize the collision rectangles
