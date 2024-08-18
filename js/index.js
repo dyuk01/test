@@ -134,11 +134,11 @@ document.addEventListener('DOMContentLoaded', function() {
             player.setCollideWorldBounds(true);
 
             // Reduce the width and height to match the visible character
-            player.body.setSize(player.width * 0.5, player.height * 0.8); 
+            player.body.setSize(player.width * 0.3, player.height * 0.5); 
 
             // Adjust the offset to center the collision box on the sprite
-            player.body.setOffset(player.width * 0.1, player.height * 0.025);
-
+            player.body.setOffset(player.width * 0.25, player.height * 0.1);
+            
             console.log("Player created:", player);
 
             const obstaclesLayer = map.getObjectLayer('obstacles');
