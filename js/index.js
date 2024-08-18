@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
             player.body.setSize(player.width * 0.2, player.height * 0.2); 
 
             // Adjust the offset to center the collision box on the sprite
-            player.body.setOffset(0, 100);
+            player.body.setOffset(0, 5);
             
             console.log("Player created:", player);
 
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     this.physics.world.enable(obstacle, Phaser.Physics.Arcade.STATIC_BODY);
 
                     obstacle.body.setSize(width, height);
-                    obstacle.body.setOffset(100, 0);
+                    obstacle.body.setOffset(15, 0);
 
                     this.physics.add.collider(player, obstacle);
     
