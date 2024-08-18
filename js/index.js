@@ -141,20 +141,16 @@ document.addEventListener('DOMContentLoaded', function() {
             player.setCollideWorldBounds(true);
             console.log("Player created:", player);
 
-            this.physics.add.collider(player, layers['land']);
-            this.physics.add.collider(player, layers['house_wall']);
-            this.physics.add.collider(player, layers['trees']);
-            this.physics.add.collider(player, layers['mine']);
-            this.physics.add.collider(player, layers['furniture']);
-
-            const objectLayer = map.getObjectLayer('Objects');
-            if (objectLayer) {
-                objectLayer.objects.forEach(function(object) {
+            const obstaclesLayer = map.getObjectLayer('obstacles');
+            if (obstaclesLayer) {
+                obstaclesLayer.objects.forEach(function(object) {
                     const { x, y, width, height } = object;
-                    const shape = this.add.rectangle(x + width / 2, y + height / 2, width, height);
-                    this.physics.world.enable(shape, Phaser.Physics.Arcade.STATIC_BODY);
-                    shape.body.setOffset(-width / 2, -height / 2);  // Align the shape correctly
-                    this.physics.add.collider(player, shape);
+
+                    // Create a static body for each rectangle in the obstacles layer
+                    const obstacle = this.add.rectangle(x + width / 2, y + height / 2, width, height);
+                    this.physics.world.enable(obstacle, Phaser.Physics.Arcade.STATIC_BODY);
+                    obstacle.body.setOffset(-width / 2, -height / 2);  // Adjust position to match Tiled's coordinates
+                    this.physics.add.collider(player, obstacle);
                 }, this);
             }
 
