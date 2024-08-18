@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     this.physics.world.enable(obstacle, Phaser.Physics.Arcade.STATIC_BODY);
 
                     obstacle.body.setSize(width, height);
-                    obstacle.body.setOffset(0, 0);
+                    obstacle.body.setOffset(100, 0);
 
                     this.physics.add.collider(player, obstacle);
     
