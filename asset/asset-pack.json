@@ -17,11 +17,6 @@
                 "key": "cave_wall"
             },
             {
-                "url": "assets/dino.png",
-                "key": "dino",
-                "type": "image"
-            },
-            {
                 "url": "asset/map/tileset/farm.png",
                 "type": "image",
                 "key": "farm"
