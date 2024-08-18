@@ -137,8 +137,8 @@ document.addEventListener('DOMContentLoaded', function() {
             player.body.setSize(player.width * 0.5, player.height * 0.8); 
 
             // Adjust the offset to center the collision box on the sprite
-            player.body.setOffset(player.width * 0.25, player.height * 0.1);
-            
+            player.body.setOffset(player.width * 0.1, player.height * 0.025);
+
             console.log("Player created:", player);
 
             const obstaclesLayer = map.getObjectLayer('obstacles');
