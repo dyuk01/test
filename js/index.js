@@ -85,8 +85,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 houseTileset,
                 pathTileset,
                 treeTileset,
-                waterTileset,
-                rockTileset
+                rockTileset,
+                waterTileset
             });
 
             layers['water'] = map.createLayer('water', [waterTileset], 0, 0);
@@ -122,30 +122,10 @@ document.addEventListener('DOMContentLoaded', function() {
             layers['furniture'] = map.createLayer('furniture', [furnitureTileset], 0, 0);
             console.log("Furniture layer created:", layers['furniture']);
 
-            // // Set collisions for layers if needed
-            // Object.values(layers).forEach(layer => {
-            //     if (layer) {
-            //         layer.setCollisionByExclusion([-1]);
-            //         console.log("Collision set for layer:", layer);
-            //     } else {
-            //         console.log("Layer is undefined:", layer);
-            //     }
-            // });
-
             // Create the player
             player = this.physics.add.sprite(370, 430, 'player');
             player.setCollideWorldBounds(true);
             console.log("Player created:", player);
-
-            // // Enable collision between the player and the layers
-            // Object.values(layers).forEach(layer => {
-            //     if (layer) {
-            //         this.physics.add.collider(player, layer);
-            //         console.log("Collider added for layer:", layer);
-            //     } else {
-            //         console.log("Layer is undefined:", layer);
-            //     }
-            // });
 
             // Create player animations
             this.anims.create({
