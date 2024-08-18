@@ -138,22 +138,30 @@ document.addEventListener('DOMContentLoaded', function() {
             
             console.log("Player created:", player);
 
-            const obstaclesLayer = map.getObjectLayer('obstacles');
             if (obstaclesLayer) {
                 obstaclesLayer.objects.forEach(function(object) {
-                    const { x, y, width, height } = object;
-    
+                    let { x, y, width, height } = object;
+            
+                    // Adjust the origin if needed (assuming Tiled uses top-left and Phaser expects center)
+                    const originAdjustmentX = width / 2; // Adjust if Phaser is using a center origin
+                    const originAdjustmentY = height / 2;
+            
+                    // Update x and y to account for the origin adjustment
+                    x = x + originAdjustmentX;
+                    y = y + originAdjustmentY;
+            
+                    // Create a static body for each rectangle in the obstacles layer
                     const obstacle = this.add.rectangle(x, y, width, height);
                     this.physics.world.enable(obstacle, Phaser.Physics.Arcade.STATIC_BODY);
-
                     obstacle.body.setSize(width, height);
-                    
+            
+                    // Add collider
                     this.physics.add.collider(player, obstacle);
-    
-                    // Visualize the collision rectangles
+            
+                    // Optional: Visualize the collision rectangles to ensure correct alignment
                     this.add.graphics()
                         .lineStyle(2, 0xff0000, 1)
-                        .strokeRect(x, y, width, height);
+                        .strokeRect(x - originAdjustmentX, y - originAdjustmentY, width, height);
                 }, this);
             }
 
