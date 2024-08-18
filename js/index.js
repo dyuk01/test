@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
             player.body.setSize(player.width * 0.2, player.height * 0.2); 
 
             // Adjust the offset to center the collision box on the sprite
-            player.body.setOffset(0, player.height * 0.05);
+            player.body.setOffset(0, 100);
             
             console.log("Player created:", player);
 
