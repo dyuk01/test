@@ -61,32 +61,30 @@ document.addEventListener('DOMContentLoaded', function() {
             map = this.make.tilemap({ key: 'map' });
             console.log("Map loaded:", map);
 
-            var caveFloorTileset = map.addTilesetImage('cave_floor', 'tile_cave_floor');
-            var caveLadderTileset = map.addTilesetImage('cave_ladder', 'tile_cave_ladder');
-            var caveWallTileset = map.addTilesetImage('cave_wall', 'tile_cave_wall');
-            var farmTileset = map.addTilesetImage('farm', 'tile_farm');
-            var furnitureTileset = map.addTilesetImage('furniture', 'tile_furniture');
-            var grassTileset = map.addTilesetImage('grass', 'tile_grass');
-            var hillsTileset = map.addTilesetImage('hills', 'tile_hills');
-            var houseTileset = map.addTilesetImage('house', 'tile_house');
-            var pathTileset = map.addTilesetImage('path', 'tile_path');
-            var treeTileset = map.addTilesetImage('tree', 'tile_tree');
             var waterTileset = map.addTilesetImage('water', 'tile_water');
-            var rockTileset = map.addTilesetImage('rock', 'tile_rock');
+            var grassTileset = map.addTilesetImage('grass', 'tile_grass');
+            var houseTileset = map.addTilesetImage('house', 'tile_house');
+            var hillsTileset = map.addTilesetImage('hills', 'tile_hills');
+            var treeTileset = map.addTilesetImage('tree', 'tile_tree');
+            var pathTileset = map.addTilesetImage('path', 'tile_path');
+            var caveLadderTileset = map.addTilesetImage('cave_ladder', 'tile_cave_ladder');
+            var furnitureTileset = map.addTilesetImage('furniture', 'tile_furniture');
+            var farmTileset = map.addTilesetImage('farm', 'tile_farm');
+
+            // var caveFloorTileset = map.addTilesetImage('cave_floor', 'tile_cave_floor');
+            // var caveWallTileset = map.addTilesetImage('cave_wall', 'tile_cave_wall');
+            // var rockTileset = map.addTilesetImage('rock', 'tile_rock');
 
             console.log("Tilesets loaded:", {
-                caveFloorTileset,
-                caveLadderTileset,
-                caveWallTileset,
-                farmTileset,
-                furnitureTileset,
+                waterTileset,
                 grassTileset,
-                hillsTileset,
                 houseTileset,
-                pathTileset,
+                hillsTileset,
                 treeTileset,
-                rockTileset,
-                waterTileset
+                pathTileset,
+                caveLadderTileset,
+                furnitureTileset,
+                farmTileset
             });
 
             layers['water'] = map.createLayer('water', [waterTileset], 0, 0);
@@ -115,9 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             layers['mine'] = map.createLayer('mine', [caveLadderTileset], 0, 0);
             console.log("Mine layer created:", layers['mine']);
-
-            layers['plants'] = map.createLayer('plants', [grassTileset, treeTileset], 0, 0);
-            console.log("Plants layer created:", layers['plants']);
 
             layers['furniture'] = map.createLayer('furniture', [furnitureTileset], 0, 0);
             console.log("Furniture layer created:", layers['furniture']);
