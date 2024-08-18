@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
             map = this.make.tilemap({ key: 'map' });
             console.log("Map loaded:", map);
 
-            var waterTileset = map.addTilesetImage('Water', 'tile_water');
+            var waterTileset = map.addTilesetImage('water', 'tile_water');
             var grassTileset = map.addTilesetImage('grass', 'tile_grass');
             var houseTileset = map.addTilesetImage('house', 'tile_house');
             var hillsTileset = map.addTilesetImage('hills', 'tile_hills');
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             layers['water'] = map.createLayer('water', [waterTileset], 0, 0);
-            console.log("Water layer created:", layers['water']);
+            console.log("Water layer created:", layers['Water']);
 
             layers['land'] = map.createLayer('land', [grassTileset], 0, 0);
             console.log("Land layer created:", layers['land']);
