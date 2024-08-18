@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
             map = this.make.tilemap({ key: 'map' });
             console.log("Map loaded:", map);
 
-            var waterTileset = map.addTilesetImage('water', 'tile_water');
+            var waterTileset = map.addTilesetImage('Water', 'tile_water');
             var grassTileset = map.addTilesetImage('grass', 'tile_grass');
             var houseTileset = map.addTilesetImage('house', 'tile_house');
             var hillsTileset = map.addTilesetImage('hills', 'tile_hills');
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         .strokeRect(x, y, width, height);
                 }, this);
             }
-            
+
             // Create player animations
             this.anims.create({
                 key: 'moveSouth',
