@@ -3,8 +3,7 @@
     {
      "export":
         {
-         "format":"json",
-         "target":"main_map.tmj"
+         "format":"json"
         }
     },
  "height":50,
@@ -1670,6 +1669,17 @@
                  "width":6.38343,
                  "x":420.242571119583,
                  "y":644.371941916448
+                }, 
+                {
+                 "height":5.67416,
+                 "id":114,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":6.38343,
+                 "x":308.887155841904,
+                 "y":404.993262577488
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1678,7 +1688,7 @@
          "y":0
         }],
  "nextlayerid":23,
- "nextobjectid":114,
+ "nextobjectid":115,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",
