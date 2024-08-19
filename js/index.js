@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
             default: 'arcade',
             arcade: {
                 gravity: { y: 0 },
-                debug: true
+                debug: false
             }
         },
         scale: {
@@ -159,10 +159,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Add collider
                     this.physics.add.collider(player, obstacles);
             
-                    // Optional: Visualize the collision rectangles to ensure correct alignment
-                    this.add.graphics()
-                        .lineStyle(2, 0xff0000, 1)
-                        .strokeRect(x - originAdjustmentX, y - originAdjustmentY, width, height);
+                    // // Optional: Visualize the collision rectangles to ensure correct alignment
+                    // this.add.graphics()
+                    //     .lineStyle(2, 0xff0000, 1)
+                    //     .strokeRect(x - originAdjustmentX, y - originAdjustmentY, width, height);
                 }, this);
             }
 
