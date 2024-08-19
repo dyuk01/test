@@ -138,6 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             console.log("Player created:", player);
 
+            const obstacles = map.getObjectiveLayer('obstacles')
             if (obstacles) {
                 obstacles.objects.forEach(function(object) {
                     let { x, y, width, height } = object;
