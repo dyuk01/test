@@ -138,8 +138,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             console.log("Player created:", player);
 
-            if (obstacle) {
-                obstacle.objects.forEach(function(object) {
+            if (obstacles) {
+                obstacles.objects.forEach(function(object) {
                     let { x, y, width, height } = object;
             
                     // Adjust the origin if needed (assuming Tiled uses top-left and Phaser expects center)
@@ -152,11 +152,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
                     // Create a static body for each rectangle in the obstacles layer
                     const obstacle = this.add.rectangle(x, y, width, height);
-                    this.physics.world.enable(obstacle, Phaser.Physics.Arcade.STATIC_BODY);
-                    obstacle.body.setSize(width, height);
+                    this.physics.world.enable(obstacles, Phaser.Physics.Arcade.STATIC_BODY);
+                    obstacles.body.setSize(width, height);
             
                     // Add collider
-                    this.physics.add.collider(player, obstacle);
+                    this.physics.add.collider(player, obstacles);
             
                     // Optional: Visualize the collision rectangles to ensure correct alignment
                     this.add.graphics()
