@@ -138,8 +138,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             console.log("Player created:", player);
 
-            if (obstaclesLayer) {
-                obstaclesLayer.objects.forEach(function(object) {
+            if (obstacle) {
+                obstacle.objects.forEach(function(object) {
                     let { x, y, width, height } = object;
             
                     // Adjust the origin if needed (assuming Tiled uses top-left and Phaser expects center)
