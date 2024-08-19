@@ -100,45 +100,56 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             layers['water'] = map.createLayer('water', [waterTileset], 0, 0);
+            layers['water'].setDepth(0); 
             console.log("Water layer created:", layers['water']);
 
             layers['land'] = map.createLayer('land', [grassTileset], 0, 0);
+            layers['land'].setDepth(1); 
             console.log("Land layer created:", layers['land']);
 
             layers['land_deco'] = map.createLayer('land_deco', [grassTileset], 0, 0);
+            layers['land_deco'].setDepth(1); 
             console.log("Land Deco layer created:", layers['land_deco']);
 
             layers['house_floor'] = map.createLayer('house_floor', [houseTileset, pathTileset], 0, 0);
+            layers['house_floor'].setDepth(2); 
             console.log("House Floor layer created:", layers['house_floor']);
 
             layers['house_wall'] = map.createLayer('house_wall', [houseTileset], 0, 0);
+            layers['house_wall'].setDepth(6); 
             console.log("House Wall layer created:", layers['house_wall']);
 
             layers['hill'] = map.createLayer('hill', [hillsTileset], 0, 0);
+            layers['hill'].setDepth(3); 
             console.log("Hill layer created:", layers['hill']);
 
             layers['trees'] = map.createLayer('trees', [treeTileset], 0, 0);
+            layers['trees'].setDepth(6); 
             console.log("Trees layer created:", layers['trees']);
 
             layers['farm'] = map.createLayer('farm', [farmTileset], 0, 0);
+            layers['farm'].setDepth(4); 
             console.log("Farm layer created:", layers['farm']);
 
             layers['mine'] = map.createLayer('mine', [caveLadderTileset], 0, 0);
+            layers['mine'].setDepth(4); 
             console.log("Mine layer created:", layers['mine']);
 
             layers['furniture'] = map.createLayer('furniture', [furnitureTileset], 0, 0);
+            layers['furniture'].setDepth(7); 
             console.log("Furniture layer created:", layers['furniture']);
 
             // Create the player
             player = this.physics.add.sprite(370, 430, 'player');
             player.setCollideWorldBounds(true);
-
+            player.setDepth(5);
             // Reduce the width and height to match the visible character
             player.body.setSize(player.width * 0.2, player.height * 0.2); 
             
             console.log("Player created:", player);
+            
 
-            const obstacles = map.getObjectiveLayer('obstacles')
+            const obstacles = map.getObjectLayer('obstacles')
             if (obstacles) {
                 obstacles.objects.forEach(function(object) {
                     let { x, y, width, height } = object;
@@ -161,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
                     // // Optional: Visualize the collision rectangles to ensure correct alignment
                     // this.add.graphics()
-                    //     .lineStyle(2, 0xff0000, 1)
+                        // .lineStyle(2, 0xff0000, 1)
                     //     .strokeRect(x - originAdjustmentX, y - originAdjustmentY, width, height);
                 }, this);
             }
