@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log("House Floor layer created:", layers['house_floor']);
 
             layers['house_wall'] = map.createLayer('house_wall', [houseTileset], 0, 0);
-            layers['house_wall'].setDepth(6); 
+            layers['house_wall'].setDepth(4); 
             console.log("House Wall layer created:", layers['house_wall']);
 
             layers['hill'] = map.createLayer('hill', [hillsTileset], 0, 0);
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log("Mine layer created:", layers['mine']);
 
             layers['furniture'] = map.createLayer('furniture', [furnitureTileset], 0, 0);
-            layers['furniture'].setDepth(7); 
+            layers['furniture'].setDepth(4); 
             console.log("Furniture layer created:", layers['furniture']);
 
             // Create the player
