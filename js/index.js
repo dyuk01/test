@@ -137,9 +137,8 @@ document.addEventListener('DOMContentLoaded', function() {
             layers['picnic_blanket'].setDepth(4); 
             console.log("Picnic Blanket layer created:", layers['picnic_blanket']);           
 
-
             layers['picnic_basket'] = map.createLayer('picnic_basket', [picnicBlanketTileset], 0, 0);
-            layers['picnic_basket'].setDepth(4); 
+            layers['picnic_basket'].setDepth(6);
             console.log("Picnic Basket layer created:", layers['picnic_basket']);        
 
             layers['hill'] = map.createLayer('hill', [hillsTileset], 0, 0);
