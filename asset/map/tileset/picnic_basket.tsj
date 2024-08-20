@@ -1,0 +1,15 @@
+{ "columns":1,
+ "image":"..\/..\/..\/..\/..\/..\/Downloads\/Sprout Lands - Sprites - premium pack\/Objects\/Piknik basket.png",
+ "imageheight":16,
+ "imagewidth":16,
+ "margin":0,
+ "name":"picnic_basket",
+ "spacing":0,
+ "tilecount":1,
+ "tiledversion":"1.11.0",
+ "tileheight":16,
+ "tilewidth":16,
+ "transparentcolor":"#a1a1a1",
+ "type":"tileset",
+ "version":"1.10"
+}

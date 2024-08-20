@@ -1,0 +1,15 @@
+{ "columns":3,
+ "image":"..\/..\/..\/..\/..\/..\/Downloads\/Sprout Lands - Sprites - premium pack\/Objects\/Piknik blanket.png",
+ "imageheight":48,
+ "imagewidth":48,
+ "margin":0,
+ "name":"picnic_blanket",
+ "spacing":0,
+ "tilecount":9,
+ "tiledversion":"1.11.0",
+ "tileheight":16,
+ "tilewidth":16,
+ "transparentcolor":"#a1a1a1",
+ "type":"tileset",
+ "version":"1.10"
+}
