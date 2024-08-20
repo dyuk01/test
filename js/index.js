@@ -64,6 +64,11 @@ document.addEventListener('DOMContentLoaded', function() {
         this.load.image('tile_tree', 'asset/map/tileset/tree.png');
         this.load.image('tile_water', 'asset/map/tileset/water.png');
         this.load.image('tile_rock', 'asset/map/tileset/rock.png'); 
+        this.load.image('tile_picnic_basket', 'asset/map/tileset/picnic_basket.png');
+        this.load.image('tile_picnic_blanket', 'asset/map/tileset/picnic_blanket.png');
+        this.load.image('tile_plants', 'asset/map/tileset/plants.png');
+        this.load.image('items', 'asset/map/tileset/items.png');
+        this.load.image('tile_well', 'asset/map/tileset/well.png');
     }
 
     function create() {
@@ -82,6 +87,12 @@ document.addEventListener('DOMContentLoaded', function() {
             var caveLadderTileset = map.addTilesetImage('cave_ladder', 'tile_cave_ladder');
             var furnitureTileset = map.addTilesetImage('furniture', 'tile_furniture');
             var farmTileset = map.addTilesetImage('farm', 'tile_farm');
+            var picnicBlanketTileset = map.addTilesetImage('picnic_blanket', 'tile_picnic_blanket');
+            var picnicBasketTileset = map.addTilesetImage('picnic_basket', 'tile_picnic_basket');
+            var plantTileset = map.addTilesetImage('plants', 'tile_plants');
+            var wellTileset = map.addTilesetImage('well', 'tile_well');
+
+
 
             // var caveFloorTileset = map.addTilesetImage('cave_floor', 'tile_cave_floor');
             // var caveWallTileset = map.addTilesetImage('cave_wall', 'tile_cave_wall');
@@ -96,7 +107,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 pathTileset,
                 caveLadderTileset,
                 furnitureTileset,
-                farmTileset
+                farmTileset,
+                picnicBasketTileset,
+                picnicBlanketTileset,
+                plantTileset
             });
 
             layers['water'] = map.createLayer('water', [waterTileset], 0, 0);
@@ -118,6 +132,15 @@ document.addEventListener('DOMContentLoaded', function() {
             layers['house_wall'] = map.createLayer('house_wall', [houseTileset], 0, 0);
             layers['house_wall'].setDepth(4); 
             console.log("House Wall layer created:", layers['house_wall']);
+ 
+            layers['picnic_blanket'] = map.createLayer('picnic_blanket', [picnicBlanketTileset], 0, 0);
+            layers['picnic_blanket'].setDepth(4); 
+            console.log("Picnic Blanket layer created:", layers['picnic_blanket']);           
+
+
+            layers['picnic_basket'] = map.createLayer('picnic_basket', [picnicBlanketTileset], 0, 0);
+            layers['picnic_basket'].setDepth(4); 
+            console.log("Picnic Basket layer created:", layers['picnic_basket']);        
 
             layers['hill'] = map.createLayer('hill', [hillsTileset], 0, 0);
             layers['hill'].setDepth(3); 
@@ -130,6 +153,14 @@ document.addEventListener('DOMContentLoaded', function() {
             layers['farm'] = map.createLayer('farm', [farmTileset], 0, 0);
             layers['farm'].setDepth(4); 
             console.log("Farm layer created:", layers['farm']);
+
+            layers['plants'] = map.createLayer('plants', [plantTileset], 0, 0);
+            layers['plants'].setDepth(4); 
+            console.log("Plants layer created:", layers['plants']);
+
+            layers['well'] = map.createLayer('well', [wellTileset], 0, 0);
+            layers['well'].setDepth(4); 
+            console.log("Well layer created:", layers['well']);
 
             layers['mine'] = map.createLayer('mine', [caveLadderTileset], 0, 0);
             layers['mine'].setDepth(4); 
