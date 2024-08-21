@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var cursors;
     var map;
     var layers = {};
+    let inventorySlots = [];
+    let inventory = [];
+    const maxInventorySlots = 10;
 
     // Audio context handling
     let audioContext;
@@ -69,6 +72,8 @@ document.addEventListener('DOMContentLoaded', function() {
         this.load.image('tile_plants', 'asset/map/tileset/plants.png');
         this.load.image('items', 'asset/map/tileset/items.png');
         this.load.image('tile_well', 'asset/map/tileset/well.png');
+        this.load.image('inventory', 'asset/map/tileset/inventory.png');  // Add a slot image for the inventory
+
     }
 
     function create() {
@@ -206,6 +211,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, this);
             }
 
+            // Set up inventory UI
+            createInventoryUI.call(this);
+
             // Create player animations
             this.anims.create({
                 key: 'moveSouth',
@@ -276,5 +284,55 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             player.anims.stop();
         }
+    }
+
+    function createInventoryUI() {
+        const inventoryBar = this.add.image(this.cameras.main.width / 2, this.cameras.main.height - 40, 'inventory_bar').setScrollFactor(0);
+        inventoryBar.setOrigin(0.5, 1);  // Center the bar horizontally and position it near the bottom
+
+        const slotSize = 32;  // Each slot inside the inventory bar
+        const padding = 10;
+        const startX = inventoryBar.x - inventoryBar.width / 2 + slotSize / 2 + 8;
+        const startY = inventoryBar.y - inventoryBar.height / 2;
+
+        for (let i = 0; i < maxInventorySlots; i++) {
+            const slotX = startX + i * (slotSize + padding);
+            const slot = this.add.image(slotX, startY, null).setScrollFactor(0);  // Empty slot to place items
+            slot.setDisplaySize(slotSize, slotSize);
+            inventorySlots.push(slot);
+        }
+
+        // Initialize inventory as empty
+        inventory = Array(maxInventorySlots).fill(null);
+    }
+
+    function updateInventoryDisplay() {
+        for (let i = 0; i < inventory.length; i++) {
+            if (inventory[i]) {
+                // If there's an item, display it in the corresponding slot
+                let itemImage = this.add.image(inventorySlots[i].x, inventorySlots[i].y, inventory[i].key).setScrollFactor(0);
+                itemImage.setDisplaySize(32, 32);  // Adjust size to fit within each slot
+            } else {
+                // If no item, ensure the slot is empty
+                inventorySlots[i].setTexture(null);  // Clear the slot
+            }
+        }
+    }
+
+    function acquireItem(itemKey) {
+        const emptySlotIndex = inventory.findIndex(slot => slot === null);
+
+        if (emptySlotIndex !== -1) {
+            inventory[emptySlotIndex] = { key: itemKey };
+            updateInventoryDisplay.call(this);
+        } else {
+            console.log('Inventory full!');  // Handle full inventory scenario
+        }
+    }
+
+    function collectItem(player, item) {
+        const itemType = item.texture.key; // Use the item's texture key as its identifier
+        acquireItem.call(this, itemType);
+        item.destroy(); // Remove the item from the game
     }
 });
