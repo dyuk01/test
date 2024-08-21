@@ -289,6 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function createInventoryUI() {
         const inventoryBar = this.add.image(this.cameras.main.width / 2, this.cameras.main.height - 40, 'inventory').setScrollFactor(0);
         inventoryBar.setOrigin(0.5, 1);  // Center the bar horizontally and position it near the bottom
+        inventoryBar.setDepth(10)
 
         const slotSize = 32;  // Each slot inside the inventory bar
         const padding = 10;
