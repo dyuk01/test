@@ -194,11 +194,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Add collider
                     this.physics.add.collider(player, obstacle);
 
-
-                    // Set up inventory UI
-                    createInventoryUI.call(this);
                 }, this);
             }
+
+            // Set up inventory UI
+            createInventoryUI.call(this);
 
             // Create player animations
             this.anims.create({
