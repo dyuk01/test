@@ -33,17 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let inventory = [];
     const maxInventorySlots = 10;
 
-    // Audio context handling
-    let audioContext;
-
-    function resumeAudioContext() {
-        if (audioContext.state === 'suspended') {
-            audioContext.resume().then(() => {
-                console.log('AudioContext resumed');
-            });
-        }
-    }
-
     function preload() {
         console.log("preload");
 
@@ -51,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
             frameWidth: 48,
             frameHeight: 48
         });
-        
 
         this.load.tilemapTiledJSON('map', 'asset/map/main_map.tmj');
 
@@ -97,8 +85,6 @@ document.addEventListener('DOMContentLoaded', function() {
             var picnicBasketTileset = map.addTilesetImage('picnic_basket', 'tile_picnic_basket');
             var plantTileset = map.addTilesetImage('plants', 'tile_plants');
             var wellTileset = map.addTilesetImage('well', 'tile_well');
-
-
 
             // var caveFloorTileset = map.addTilesetImage('cave_floor', 'tile_cave_floor');
             // var caveWallTileset = map.addTilesetImage('cave_wall', 'tile_cave_wall');
@@ -204,11 +190,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
                     // Add collider
                     this.physics.add.collider(player, obstacle);
-            
-                    // // Optional: Visualize the collision rectangles to ensure correct alignment
-                    // this.add.graphics()
-                    //     .lineStyle(2, 0xff0000, 1)
-                    //     .strokeRect(x - originAdjustmentX, y - originAdjustmentY, width, height);
                 }, this);
             }
 
