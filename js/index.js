@@ -77,6 +77,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function create() {
+        resumeAudioContext();
+        
         console.log("create");
 
         try {

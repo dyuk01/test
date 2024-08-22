@@ -1927,7 +1927,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -5658,32 +5658,12 @@
          "transparentcolor":"#a1a1a1"
         }, 
         {
-         "columns":3,
          "firstgid":1198,
-         "image":"..\/..\/..\/..\/..\/Downloads\/Sprout Lands - Sprites - premium pack\/Objects\/Piknik blanket.png",
-         "imageheight":48,
-         "imagewidth":48,
-         "margin":0,
-         "name":"picnic_blanket",
-         "spacing":0,
-         "tilecount":9,
-         "tileheight":16,
-         "tilewidth":16,
-         "transparentcolor":"#a1a1a1"
+         "source":"tileset\/picnic_blanket.tsj"
         }, 
         {
-         "columns":1,
          "firstgid":1207,
-         "image":"..\/..\/..\/..\/..\/Downloads\/Sprout Lands - Sprites - premium pack\/Objects\/Piknik basket.png",
-         "imageheight":16,
-         "imagewidth":16,
-         "margin":0,
-         "name":"picnic_basket",
-         "spacing":0,
-         "tilecount":1,
-         "tileheight":16,
-         "tilewidth":16,
-         "transparentcolor":"#a1a1a1"
+         "source":"tileset\/picnic_basket.tsj"
         }],
  "tilewidth":16,
  "type":"map",
