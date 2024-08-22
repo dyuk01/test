@@ -33,6 +33,17 @@ document.addEventListener('DOMContentLoaded', function() {
     let inventory = [];
     const maxInventorySlots = 10;
 
+    // Audio context handling
+    let audioContext;
+
+    function resumeAudioContext() {
+        if (audioContext.state === 'suspended') {
+            audioContext.resume().then(() => {
+                console.log('AudioContext resumed');
+            });
+        }
+    }
+
     function preload() {
         console.log("preload");
 
@@ -193,7 +204,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
                     // Add collider
                     this.physics.add.collider(player, obstacle);
-
+            
+                    // // Optional: Visualize the collision rectangles to ensure correct alignment
+                    // this.add.graphics()
+                    //     .lineStyle(2, 0xff0000, 1)
+                    //     .strokeRect(x - originAdjustmentX, y - originAdjustmentY, width, height);
                 }, this);
             }
 
@@ -273,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function createInventoryUI() {
-        const inventoryBar = this.add.image(this.cameras.main.width, this.cameras.main.height, 'inventory').setScrollFactor(0);
+        const inventoryBar = this.add.image(this.cameras.main.width / 2, this.cameras.main.height - 40, 'inventory').setScrollFactor(0);
         inventoryBar.setOrigin(0.5, 1);  // Center the bar horizontally and position it near the bottom
         inventoryBar.setDepth(10)
 
