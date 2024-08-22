@@ -33,17 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let inventory = [];
     const maxInventorySlots = 10;
 
-    // Audio context handling
-    let audioContext;
-
-    function resumeAudioContext() {
-        if (audioContext.state === 'suspended') {
-            audioContext.resume().then(() => {
-                console.log('AudioContext resumed');
-            });
-        }
-    }
-
     function preload() {
         console.log("preload");
 
@@ -77,8 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function create() {
-        resumeAudioContext();
-        
+
         console.log("create");
 
         try {
