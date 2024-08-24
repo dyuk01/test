@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
             player.setCollideWorldBounds(true);
             player.setDepth(5);
             player.body.setSize(player.width * 0.15, player.height * 0.15); 
-            player.body.setOffset(0, -50);
+            player.body.setOffset(0, 50);
             
             console.log("Player created:", player);
 
