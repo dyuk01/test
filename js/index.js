@@ -43,7 +43,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function preload() {
         console.log("preload");
-
+        console.log("test");
+        
         this.load.spritesheet('player', 'img/spritesheet/player_movement.png', {
             frameWidth: 48,
             frameHeight: 48
