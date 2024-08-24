@@ -29,6 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var cursors;
     var map;
     var layers = {};
+    var inventory = [];
+    var inventoryText = [];
 
     // Audio context handling
     let audioContext;
@@ -44,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function preload() {
         console.log("preload");
         console.log("test");
-        
+
         this.load.spritesheet('player', 'img/spritesheet/player_movement.png', {
             frameWidth: 48,
             frameHeight: 48
@@ -70,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
         this.load.image('tile_plants', 'asset/map/tileset/plants.png');
         this.load.image('items', 'asset/map/tileset/items.png');
         this.load.image('tile_well', 'asset/map/tileset/well.png');
+        this.load.image('inventory', 'asset/map/tileset/inventory.png');
     }
 
     function create() {
@@ -178,6 +181,9 @@ document.addEventListener('DOMContentLoaded', function() {
             player.body.setSize(player.width * 0.2, player.height * 0.2); 
             
             console.log("Player created:", player);
+
+            // Initialize Inventory
+            initializeInventory.call(this);
             
             const obstaclesLayer = map.getObjectLayer('obstacles');
             if (obstaclesLayer) {
@@ -199,11 +205,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
                     // Add collider
                     this.physics.add.collider(player, obstacle);
-            
-                    // // Optional: Visualize the collision rectangles to ensure correct alignment
-                    // this.add.graphics()
-                    //     .lineStyle(2, 0xff0000, 1)
-                    //     .strokeRect(x - originAdjustmentX, y - originAdjustmentY, width, height);
                 }, this);
             }
 
@@ -276,6 +277,32 @@ document.addEventListener('DOMContentLoaded', function() {
             player.anims.play('moveSouth', true);
         } else {
             player.anims.stop();
+        }
+    }
+    
+    function initializeInventory() {
+        // Initialize inventory with 10 slots, each storing up to 64 items
+        for (let i = 0; i < 10; i++) {
+            inventory.push({ item: null, count: 0 });
+
+            // Create an inventory slot visual representation
+            let slotX = 50 + i * 70;
+            let slotY = 50;
+
+            // Add item icon (placeholder item_icon used)
+            let itemIcon = this.add.image(slotX, slotY, 'item_icon');
+            itemIcon.setScale(0.5); // Adjust scale as necessary
+
+            // Add text to display item count
+            let countText = this.add.text(slotX - 10, slotY + 20, '0', { fontSize: '16px', fill: '#FFFFFF' });
+            inventoryText.push(countText);
+        }
+    }
+
+    // Function to update inventory display, call this whenever inventory changes
+    function updateInventoryDisplay() {
+        for (let i = 0; i < inventory.length; i++) {
+            inventoryText[i].setText(inventory[i].count.toString());
         }
     }
 });
