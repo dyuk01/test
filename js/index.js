@@ -283,17 +283,21 @@ document.addEventListener('DOMContentLoaded', function() {
         // Initialize inventory with 10 slots, each storing up to 64 items
         for (let i = 0; i < 10; i++) {
             inventory.push({ item: null, count: 0 });
-
+    
             // Create an inventory slot visual representation
             let slotX = 50 + i * 70;
             let slotY = 50;
-
-            // Add item icon (placeholder item_icon used)
-            let itemIcon = this.add.image(slotX, slotY, 'item_icon');
+    
+            // Use the correct image key (assuming 'inventory' is the key for the inventory slot image)
+            let itemIcon = this.add.image(slotX, slotY, 'inventory');  // Corrected to use 'inventory' key
             itemIcon.setScale(0.5); // Adjust scale as necessary
-
+    
+            // Set depth to ensure inventory is above other game elements
+            itemIcon.setDepth(10);
+    
             // Add text to display item count
             let countText = this.add.text(slotX - 10, slotY + 20, '0', { fontSize: '16px', fill: '#FFFFFF' });
+            countText.setDepth(10);  // Set depth for the text as well
             inventoryText.push(countText);
         }
     }
