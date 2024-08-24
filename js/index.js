@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function preload() {
         console.log("preload");
-        console.log("test");
 
         this.load.spritesheet('player', 'img/spritesheet/player_movement.png', {
             frameWidth: 48,
@@ -279,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function() {
             player.anims.stop();
         }
     }
-    
+
     function initializeInventory() {
         // Initialize inventory with 10 slots, each storing up to 64 items
         for (let i = 0; i < 10; i++) {
