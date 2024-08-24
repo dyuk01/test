@@ -171,7 +171,8 @@ document.addEventListener('DOMContentLoaded', function() {
             player = this.physics.add.sprite(370, 430, 'player');
             player.setCollideWorldBounds(true);
             player.setDepth(5);
-            player.body.setSize(player.width * 0.2, player.height * 0.2); 
+            player.body.setSize(player.width * 0.15, player.height * 0.15); 
+            player.body.setOffset(0, 5);
             
             console.log("Player created:", player);
 
