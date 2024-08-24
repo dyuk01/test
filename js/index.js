@@ -269,26 +269,33 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function createInventoryUI() {
-        const inventoryBar = this.add.image(this.cameras.main.width / 2, this.cameras.main.height - 20, 'inventory').setScrollFactor(0);
-        inventoryBar.setOrigin(0.5, 1);  
-        inventoryBar.setDepth(10);  
+        // Load and display the inventory bar
+        const inventoryBar = this.add.image(this.cameras.main.width / 2, this.cameras.main.height - 40, 'inventory').setScrollFactor(0);
+        inventoryBar.setOrigin(0.5, 1); // Center the bar horizontally and position it near the bottom
+        inventoryBar.setDepth(10); // Ensure it is rendered on top of other elements
     
-        const slotSize = 32;  
-        const padding = 10;  
-        const startX = inventoryBar.x - (inventoryBar.displayWidth / 2) + slotSize / 2 + 8;  
+        // Scale inventory bar to fit the screen width
+        inventoryBar.displayWidth = this.cameras.main.width * 0.9; // Adjust scale as needed
+        inventoryBar.scaleY = inventoryBar.scaleX; // Keep aspect ratio
+    
+        // Define the slot size and position within the inventory bar
+        const slotSize = 32; // Size of each slot inside the inventory bar
+        const padding = 10; // Padding between slots
+        const startX = inventoryBar.x - (inventoryBar.displayWidth / 2) + slotSize / 2 + 8; // Start position for slots
         const startY = inventoryBar.y - inventoryBar.displayHeight / 2;
     
+        // Create inventory slots
         for (let i = 0; i < maxInventorySlots; i++) {
             const slotX = startX + i * (slotSize + padding);
-            const slot = this.add.image(slotX, startY, null).setScrollFactor(0); 
+            const slot = this.add.image(slotX, startY, null).setScrollFactor(0); // Empty slot to place items
             slot.setDisplaySize(slotSize, slotSize);
-            slot.setDepth(11);  
+            slot.setDepth(11); // Ensure items are rendered on top of the inventory bar
             inventorySlots.push(slot);
         }
     
+        // Initialize inventory as empty
         inventory = Array(maxInventorySlots).fill(null);
     }
-    
     function updateInventoryDisplay() {
         for (let i = 0; i < inventory.length; i++) {
             if (inventory[i]) {
