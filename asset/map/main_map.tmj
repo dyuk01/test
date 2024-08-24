@@ -2226,7 +2226,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"tileset\/water.tsj"
+         "source":"tileset\/water.png"
         }, 
         {
          "columns":11,
@@ -3545,7 +3545,7 @@
         }, 
         {
          "firstgid":210,
-         "source":"tileset\/rock.tsj"
+         "source":"tileset\/rock.png"
         }, 
         {
          "columns":11,
@@ -3840,15 +3840,15 @@
         }, 
         {
          "firstgid":900,
-         "source":"tileset\/tree.tsj"
+         "source":"tileset\/tree.png"
         }, 
         {
          "firstgid":945,
-         "source":"tileset\/cave_ladder.tsj"
+         "source":"tileset\/cave_ladder.png"
         }, 
         {
          "firstgid":1089,
-         "source":"tileset\/plants.tsj"
+         "source":"tileset\/plants.png"
         }, 
         {
          "columns":2,
@@ -3866,7 +3866,7 @@
         }, 
         {
          "firstgid":1194,
-         "source":"tileset\/well.tsj"
+         "source":"tileset\/well.png"
         }, 
         {
          "columns":3,
