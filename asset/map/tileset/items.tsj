@@ -1,0 +1,15 @@
+{ "columns":2,
+ "image":"..\/..\/..\/..\/..\/..\/Downloads\/Sprout Lands - Sprites - premium pack\/Objects\/Items\/farming-Plants-items.png",
+ "imageheight":240,
+ "imagewidth":32,
+ "margin":0,
+ "name":"plant_items",
+ "spacing":0,
+ "tilecount":30,
+ "tiledversion":"1.11.0",
+ "tileheight":16,
+ "tilewidth":16,
+ "transparentcolor":"#a1a1a1",
+ "type":"tileset",
+ "version":"1.10"
+}

@@ -1,0 +1,15 @@
+{ "columns":2,
+ "image":"..\/..\/..\/..\/..\/..\/Downloads\/Sprout Lands - Sprites - premium pack\/Objects\/Water well.png",
+ "imageheight":32,
+ "imagewidth":32,
+ "margin":0,
+ "name":"well",
+ "spacing":0,
+ "tilecount":4,
+ "tiledversion":"1.11.0",
+ "tileheight":16,
+ "tilewidth":16,
+ "transparentcolor":"#a1a1a1",
+ "type":"tileset",
+ "version":"1.10"
+}
