@@ -30,7 +30,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var map;
     var layers = {};
     var inventory = [];
+    var inventorySlots = []; // Define inventorySlots array
     var inventoryText = [];
+    const maxInventorySlots = 10; // Define the number of inventory slots
 
     // Audio context handling
     let audioContext;
@@ -50,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
             frameWidth: 48,
             frameHeight: 48
         });
-        
 
         this.load.tilemapTiledJSON('map', 'asset/map/main_map.tmj');
 
@@ -71,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
         this.load.image('tile_plants', 'asset/map/tileset/plants.png');
         this.load.image('items', 'asset/map/tileset/items.png');
         this.load.image('tile_well', 'asset/map/tileset/well.png');
-        this.load.image('inventory', 'asset/map/tileset/inventory.png');
+        this.load.image('inventory', 'asset/map/tileset/inventory.png'); // Ensure this path is correct
     }
 
     function create() {
@@ -94,12 +95,6 @@ document.addEventListener('DOMContentLoaded', function() {
             var picnicBasketTileset = map.addTilesetImage('picnic_basket', 'tile_picnic_basket');
             var plantTileset = map.addTilesetImage('plants', 'tile_plants');
             var wellTileset = map.addTilesetImage('well', 'tile_well');
-
-
-
-            // var caveFloorTileset = map.addTilesetImage('cave_floor', 'tile_cave_floor');
-            // var caveWallTileset = map.addTilesetImage('cave_wall', 'tile_cave_wall');
-            // var rockTileset = map.addTilesetImage('rock', 'tile_rock');
 
             console.log("Tilesets loaded:", {
                 waterTileset,
@@ -176,33 +171,28 @@ document.addEventListener('DOMContentLoaded', function() {
             player = this.physics.add.sprite(370, 430, 'player');
             player.setCollideWorldBounds(true);
             player.setDepth(5);
-            // Reduce the width and height to match the visible character
             player.body.setSize(player.width * 0.2, player.height * 0.2); 
             
             console.log("Player created:", player);
 
             // Initialize Inventory
-            initializeInventory.call(this);
+            createInventoryUI.call(this);
             
             const obstaclesLayer = map.getObjectLayer('obstacles');
             if (obstaclesLayer) {
                 obstaclesLayer.objects.forEach(function(object) {
                     let { x, y, width, height } = object;
             
-                    // Adjust the origin if needed (assuming Tiled uses top-left and Phaser expects center)
                     const originAdjustmentX = width / 2; // Adjust if Phaser is using a center origin
                     const originAdjustmentY = height / 2;
             
-                    // Update x and y to account for the origin adjustment
                     x = x + originAdjustmentX;
                     y = y + originAdjustmentY;
             
-                    // Create a static body for each rectangle in the obstacles layer
                     const obstacle = this.add.rectangle(x, y, width, height);
                     this.physics.world.enable(obstacle, Phaser.Physics.Arcade.STATIC_BODY);
                     obstacle.body.setSize(width, height);
             
-                    // Add collider
                     this.physics.add.collider(player, obstacle);
                 }, this);
             }
@@ -249,7 +239,6 @@ document.addEventListener('DOMContentLoaded', function() {
             this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
             this.cameras.main.setZoom(3);  // Adjust the zoom level as needed
 
-            // Center the camera viewport within the canvas
             var viewportWidth = config.width;
             var viewportHeight = config.height;
             this.cameras.main.setViewport(0, 0, viewportWidth, viewportHeight);
@@ -279,33 +268,36 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function initializeInventory() {
-        // Initialize inventory with 10 slots, each storing up to 64 items
-        for (let i = 0; i < 10; i++) {
-            inventory.push({ item: null, count: 0 });
+    function createInventoryUI() {
+        const inventoryBar = this.add.image(this.cameras.main.width / 2, this.cameras.main.height - 20, 'inventory').setScrollFactor(0);
+        inventoryBar.setOrigin(0.5, 1);  
+        inventoryBar.setDepth(10);  
     
-            // Create an inventory slot visual representation
-            let slotX = 50 + i * 70;
-            let slotY = 50;
+        const slotSize = 32;  
+        const padding = 10;  
+        const startX = inventoryBar.x - (inventoryBar.displayWidth / 2) + slotSize / 2 + 8;  
+        const startY = inventoryBar.y - inventoryBar.displayHeight / 2;
     
-            // Use the correct image key (assuming 'inventory' is the key for the inventory slot image)
-            let itemIcon = this.add.image(slotX, slotY, 'inventory');  // Corrected to use 'inventory' key
-            itemIcon.setScale(0.5); // Adjust scale as necessary
-    
-            // Set depth to ensure inventory is above other game elements
-            itemIcon.setDepth(10);
-    
-            // Add text to display item count
-            let countText = this.add.text(slotX - 10, slotY + 20, '0', { fontSize: '16px', fill: '#FFFFFF' });
-            countText.setDepth(10);  // Set depth for the text as well
-            inventoryText.push(countText);
+        for (let i = 0; i < maxInventorySlots; i++) {
+            const slotX = startX + i * (slotSize + padding);
+            const slot = this.add.image(slotX, startY, null).setScrollFactor(0); 
+            slot.setDisplaySize(slotSize, slotSize);
+            slot.setDepth(11);  
+            inventorySlots.push(slot);
         }
+    
+        inventory = Array(maxInventorySlots).fill(null);
     }
-
-    // Function to update inventory display, call this whenever inventory changes
+    
     function updateInventoryDisplay() {
         for (let i = 0; i < inventory.length; i++) {
-            inventoryText[i].setText(inventory[i].count.toString());
+            if (inventory[i]) {
+                let itemImage = this.add.image(inventorySlots[i].x, inventorySlots[i].y, inventory[i].key).setScrollFactor(0);
+                itemImage.setDisplaySize(32, 32);  
+                itemImage.setDepth(12);  
+            } else {
+                inventorySlots[i].setTexture(null);  
+            }
         }
     }
 });
