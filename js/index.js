@@ -172,7 +172,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Create UI Camera
             const uiCamera = this.cameras.add(0, 0, 800, 1200).setZoom(1);
-            uiCamera.ignore(layers['water'], layers['land'], layers['land_deco'], layers['house_floor'], layers['house_wall'], layers['picnic_blanket'], layers['picnic_basket'], layers['hill'], layers['trees'], layers['farm'], layers['plants'], layers['well'], layers['mine'], layers['furniture'], player);
+            uiCamera.ignore(layers['water']);
+            uiCamera.ignore(layers['land']);
+            uiCamera.ignore(layers['land_deco']);
+            uiCamera.ignore(layers['house_floor']);
+            uiCamera.ignore(layers['house_wall']);
+            uiCamera.ignore(layers['picnic_blanket']);
+            uiCamera.ignore(layers['picnic_basket']);
+            uiCamera.ignore(layers['hill']);
+            uiCamera.ignore(layers['trees']);
+            uiCamera.ignore(layers['farm']);
+            uiCamera.ignore(layers['plants']);
+            uiCamera.ignore(layers['well']);
+            uiCamera.ignore(layers['mine']);
+            uiCamera.ignore(layers['furniture']);
+
             
             // Initialize Inventory
             createInventoryUI.call(this, uiCamera);
