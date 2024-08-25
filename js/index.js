@@ -165,8 +165,17 @@ document.addEventListener('DOMContentLoaded', function() {
             
             console.log("Player created:", player);
 
+            // Set up main game camera
+            this.cameras.main.startFollow(player);
+            this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+            this.cameras.main.setZoom(2.75);  // Adjust the zoom level as needed
+
+            // Create UI Camera
+            const uiCamera = this.cameras.add(0, 0, 800, 1200).setZoom(1);
+            uiCamera.ignore(layers['water'], layers['land'], layers['land_deco'], layers['house_floor'], layers['house_wall'], layers['picnic_blanket'], layers['picnic_basket'], layers['hill'], layers['trees'], layers['farm'], layers['plants'], layers['well'], layers['mine'], layers['furniture'], player);
+            
             // Initialize Inventory
-            createInventoryUI.call(this);
+            createInventoryUI.call(this, uiCamera);
             
             const obstaclesLayer = map.getObjectLayer('obstacles');
             if (obstaclesLayer) {
@@ -224,15 +233,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 right: Phaser.Input.Keyboard.KeyCodes.D
             });
 
-            // Set up the camera to follow the player and zoom in
-            this.cameras.main.startFollow(player);
-            this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-            this.cameras.main.setZoom(2.75);  // Adjust the zoom level as needed
-
-            var viewportWidth = config.width;
-            var viewportHeight = config.height;
-            this.cameras.main.setViewport(0, 0, viewportWidth, viewportHeight);
-
         } catch (error) {
             console.error("An error occurred during create:", error);
         }
@@ -256,72 +256,37 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             player.anims.stop();
         }
-
-        // Update the inventory bar position relative to the camera
-        const camera = this.cameras.main;
-        const zoomFactor = camera.zoom;
-
-        // Keep inventory centered horizontally and 10 pixels from the top of the camera's view
-        this.inventoryBar.x = camera.midPoint.x + 10;
-        this.inventoryBar.y = camera.worldView.y + (camera.height / 2) / zoomFactor - this.inventoryBar.displayHeight - 10;
-
-        // Update the position of inventory slots as well
-        const scaleFactor = 0.2; // Ensure scaleFactor matches the one used in createInventoryUI
-        const slotSize = 32 * scaleFactor;
-        const padding = 10 * scaleFactor;
-        const startX = this.inventoryBar.x - (this.inventoryBar.displayWidth / 2) + slotSize / 2 + 6; // Start position for slots
-        const startY = this.inventoryBar.y + this.inventoryBar.displayHeight / 2;
-        
-        for (let i = 0; i < inventorySlots.length; i++) {
-            const slotX = startX + i * (slotSize + padding);
-            inventorySlots[i].x = slotX;
-            inventorySlots[i].y = startY;
-        }
     }
 
-    function createInventoryUI() {
+    function createInventoryUI(uiCamera) {
         // Create the inventory bar
-        this.inventoryBar = this.add.image(0, 0, 'inventory').setScrollFactor(0);
-        this.inventoryBar.setOrigin(0.5, 0); // Center the bar horizontally and align to the top
-        this.inventoryBar.setDepth(10); // Ensure it is rendered on top of other elements
+        inventoryBar = this.add.image(400, 40, 'inventory'); // Position at top middle
+        inventoryBar.setOrigin(0.5, 0); // Center the bar horizontally
+        inventoryBar.setDepth(10); // Ensure it is rendered on top of other elements
+        uiCamera.ignore(inventoryBar); // Tell the main camera to ignore this element
         
         // Scale inventory bar to fit the screen width
         const scaleFactor = 0.7; // Adjust this value to make the bar smaller
-        this.inventoryBar.displayWidth = (this.cameras.main.width * scaleFactor) / 3; // Adjust scale as needed
-        this.inventoryBar.displayHeight = this.inventoryBar.height * scaleFactor; // Keep aspect ratio using scaleFactor
-        
-        // Initial position relative to the camera's top-middle point
-        this.inventoryBar.x = this.cameras.main.scrollX + this.cameras.main.width / 2;
-        this.inventoryBar.y = this.cameras.main.scrollY + 20;  // 20 pixels from the top
+        inventoryBar.displayWidth = (this.cameras.main.width * scaleFactor) / 3; // Adjust scale as needed
+        inventoryBar.displayHeight = inventoryBar.height * scaleFactor; // Keep aspect ratio using scaleFactor
         
         // Define the slot size and position within the inventory bar
         const slotSize = 32 * scaleFactor; // Scale down the slot size
         const padding = 5 * scaleFactor; // Scale down the padding
-        const startX = this.inventoryBar.x - (this.inventoryBar.displayWidth / 2) + slotSize / 2 + 30; // Start position for slots
-        const startY = this.inventoryBar.y + this.inventoryBar.displayHeight / 2 + 10;
+        const startX = inventoryBar.x - (inventoryBar.displayWidth / 2) + slotSize / 2 + 30; // Start position for slots
+        const startY = inventoryBar.y + inventoryBar.displayHeight / 2 + 10;
         
         // Create inventory slots
         for (let i = 0; i < maxInventorySlots; i++) {
             const slotX = startX + i * (slotSize + padding);
-            const slot = this.add.image(slotX, startY, null).setScrollFactor(0); // Empty slot to place items
+            const slot = this.add.image(slotX, startY, null); // Empty slot to place items
             slot.setDisplaySize(slotSize, slotSize);
             slot.setDepth(11); // Ensure items are rendered on top of the inventory bar
             inventorySlots.push(slot);
+            uiCamera.ignore(slot); // Tell the main camera to ignore this element
         }
         
         // Initialize inventory as empty
         inventory = Array(maxInventorySlots).fill(null);
-    }
-    
-    function updateInventoryDisplay() {
-        for (let i = 0; i < inventory.length; i++) {
-            if (inventory[i]) {
-                let itemImage = this.add.image(inventorySlots[i].x, inventorySlots[i].y, inventory[i].key).setScrollFactor(0);
-                itemImage.setDisplaySize(32, 32);  
-                itemImage.setDepth(12);  
-            } else {
-                inventorySlots[i].setTexture(null);  
-            }
-        }
     }
 });
