@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var config = {
         type: Phaser.AUTO,
         parent: 'game',
-        width: 800, // Fixed width
-        height: 600, // Fixed height
+        width: window.innerWidth,
+        height: window.innerHeight,
         scene: {
             preload: preload,
             create: create,
@@ -20,9 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         scale: {
             mode: Phaser.Scale.FIT,
-            autoCenter: Phaser.Scale.CENTER_BOTH, // Center the game canvas
-            width: window.innerWidth, // Take the full width of the screen
-            height: window.innerHeight // Take the full height of the screen
+            autoCenter: Phaser.Scale.CENTER_BOTH
         }
     };
 
@@ -32,8 +30,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var map;
     var layers = {};
     var inventory = [];
-    var inventorySlots = [];
-    const maxInventorySlots = 10;
+    var inventorySlots = []; // Define inventorySlots array
+    var inventoryText = [];
+    const maxInventorySlots = 10; // Define the number of inventory slots
 
     // Audio context handling
     let audioContext;
@@ -73,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
         this.load.image('tile_plants', 'asset/map/tileset/plants.png');
         this.load.image('items', 'asset/map/tileset/items.png');
         this.load.image('tile_well', 'asset/map/tileset/well.png');
-        this.load.image('inventory', 'asset/map/tileset/inventory.png');
+        this.load.image('inventory', 'asset/map/tileset/inventory.png'); // Ensure this path is correct
     }
 
     function create() {
@@ -172,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
             player = this.physics.add.sprite(370, 430, 'player');
             player.setCollideWorldBounds(true);
             player.setDepth(5);
-            player.body.setSize(player.width * 0.2, player.height * 0.2); 
+            player.body.setSize(player.width * 0.15, player.height * 0.15); 
             
             console.log("Player created:", player);
 
@@ -236,9 +235,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             // Set up the camera to follow the player and zoom in
-            this.cameras.main.startFollow(player);
+            // this.cameras.main.startFollow(player);
             this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-            this.cameras.main.setZoom(1);  // Set zoom level to maintain map size
+            // this.cameras.main.setZoom(3);  // Adjust the zoom level as needed
 
             var viewportWidth = config.width;
             var viewportHeight = config.height;
@@ -270,23 +269,31 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function createInventoryUI() {
+        // Load and display the inventory bar
         const inventoryBar = this.add.image(this.cameras.main.width / 2, this.cameras.main.height - 40, 'inventory').setScrollFactor(0);
-        inventoryBar.setOrigin(0.5, 1);  
-        inventoryBar.setDepth(10);  
+        inventoryBar.setOrigin(0.5, 1); // Center the bar horizontally and position it near the bottom
+        inventoryBar.setDepth(10); // Ensure it is rendered on top of other elements
     
-        const slotSize = 32;  
-        const padding = 10;  
-        const startX = inventoryBar.x - (inventoryBar.displayWidth / 2) + slotSize / 2 + 8;  
+        // Scale inventory bar to fit the screen width
+        inventoryBar.displayWidth = this.cameras.main.width * 0.9; // Adjust scale as needed
+        inventoryBar.scaleY = inventoryBar.scaleX; // Keep aspect ratio
+    
+        // Define the slot size and position within the inventory bar
+        const slotSize = 32; // Size of each slot inside the inventory bar
+        const padding = 10; // Padding between slots
+        const startX = inventoryBar.x - (inventoryBar.displayWidth / 2) + slotSize / 2 + 8; // Start position for slots
         const startY = inventoryBar.y - inventoryBar.displayHeight / 2;
     
+        // Create inventory slots
         for (let i = 0; i < maxInventorySlots; i++) {
             const slotX = startX + i * (slotSize + padding);
-            const slot = this.add.image(slotX, startY, null).setScrollFactor(0); 
+            const slot = this.add.image(slotX, startY, null).setScrollFactor(0); // Empty slot to place items
             slot.setDisplaySize(slotSize, slotSize);
-            slot.setDepth(11);  
+            slot.setDepth(11); // Ensure items are rendered on top of the inventory bar
             inventorySlots.push(slot);
         }
     
+        // Initialize inventory as empty
         inventory = Array(maxInventorySlots).fill(null);
     }
     
