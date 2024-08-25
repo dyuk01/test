@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Set up the camera to follow the player and zoom in
             this.cameras.main.startFollow(player);
             this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-            this.cameras.main.setZoom(2);  // Adjust the zoom level as needed
+            this.cameras.main.setZoom(2.5);  // Adjust the zoom level as needed
 
             var viewportWidth = config.width;
             var viewportHeight = config.height;
@@ -282,6 +282,10 @@ document.addEventListener('DOMContentLoaded', function() {
         graphics.lineStyle(2, 0xff0000, 1); // Red color for debug lines
         drawDebug(player); // Draw player's collision box
         // Optionally, draw more debug lines here as needed
+
+        // Update the inventory bar position relative to the camera
+        this.inventoryBar.x = this.cameras.main.midPoint.x; // Keep inventory centered horizontally
+        this.inventoryBar.y = this.cameras.main.worldView.y + 10; // Keep it 10 pixels from the top of the camera's view
     }
 
     function drawDebug(gameObject) {
@@ -296,7 +300,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function createInventoryUI() {
-        // Load and display the inventory bar
+        // Create the inventory bar
         const inventoryBar = this.add.image(0, 0, 'inventory').setScrollFactor(0);
         inventoryBar.setOrigin(0.5, 0); // Center the bar horizontally and align to the top
         inventoryBar.setDepth(10); // Ensure it is rendered on top of other elements
@@ -325,6 +329,9 @@ document.addEventListener('DOMContentLoaded', function() {
             slot.setDepth(11); // Ensure items are rendered on top of the inventory bar
             inventorySlots.push(slot);
         }
+    
+        // Store the inventory bar as a reference for updating
+        this.inventoryBar = inventoryBar;
     
         // Initialize inventory as empty
         inventory = Array(maxInventorySlots).fill(null);
