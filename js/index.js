@@ -268,7 +268,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update the position of inventory slots as well
         const scaleFactor = 0.3; // Ensure scaleFactor matches the one used in createInventoryUI
         const slotSize = 32 * scaleFactor;
-        const padding = 5 * scaleFactor;
+        const padding = 7.5 * scaleFactor;
         const startX = this.inventoryBar.x - (this.inventoryBar.displayWidth / 2) + slotSize / 2 + 4; // Start position for slots
         const startY = this.inventoryBar.y + this.inventoryBar.displayHeight / 2;
         
@@ -286,8 +286,8 @@ document.addEventListener('DOMContentLoaded', function() {
         this.inventoryBar.setDepth(10); // Ensure it is rendered on top of other elements
         
         // Scale inventory bar to fit the screen width
-        const scaleFactor = 0.4; // Adjust this value to make the bar smaller
-        this.inventoryBar.displayWidth = (this.cameras.main.width * scaleFactor) / 2; // Adjust scale as needed
+        const scaleFactor = 0.5; // Adjust this value to make the bar smaller
+        this.inventoryBar.displayWidth = (this.cameras.main.width * scaleFactor) / 3; // Adjust scale as needed
         this.inventoryBar.displayHeight = this.inventoryBar.height * scaleFactor; // Keep aspect ratio using scaleFactor
         
         // Define the slot size and position within the inventory bar
