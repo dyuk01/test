@@ -293,8 +293,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Define the slot size and position within the inventory bar
         const slotSize = 32 * scaleFactor; // Scale down the slot size
         const padding = 5 * scaleFactor; // Scale down the padding
-        const startX = this.inventoryBar.x - (this.inventoryBar.displayWidth / 2) + slotSize / 2 + 8; // Start position for slots
-        const startY = this.inventoryBar.y + this.inventoryBar.displayHeight / 2;
+        const startX = this.inventoryBar.x - (this.inventoryBar.displayWidth / 2) + slotSize / 2 + 16; // Start position for slots
+        const startY = this.inventoryBar.y + this.inventoryBar.displayHeight / 2 + 10;
         
         // Create inventory slots
         for (let i = 0; i < maxInventorySlots; i++) {
