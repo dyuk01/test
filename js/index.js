@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var inventorySlots = []; // Define inventorySlots array
     var inventoryText = [];
     const maxInventorySlots = 10; // Define the number of inventory slots
+    var inventoryBar;
 
     function preload() {
         console.log("preload");
