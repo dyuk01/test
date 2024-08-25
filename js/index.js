@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var inventorySlots = []; // Define inventorySlots array
     var inventoryText = [];
     const maxInventorySlots = 10; // Define the number of inventory slots
+    var graphics;
 
     function preload() {
         console.log("preload");
@@ -230,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Set up the camera to follow the player and zoom in
             this.cameras.main.startFollow(player);
             this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-            //this.cameras.main.setZoom(2.75);  // Adjust the zoom level as needed
+            // this.cameras.main.setZoom(2.75);  // Adjust the zoom level as needed
 
             var viewportWidth = config.width;
             var viewportHeight = config.height;
@@ -260,10 +261,13 @@ document.addEventListener('DOMContentLoaded', function() {
             player.anims.stop();
         }
 
-
         // Update the inventory bar position relative to the camera
-        this.inventoryBar.x = this.cameras.main.midPoint.x; // Keep inventory centered horizontally
-        this.inventoryBar.y = this.cameras.main.worldView.y + 10; // Keep it 10 pixels from the top of the camera's view
+        const camera = this.cameras.main;
+        const zoomFactor = camera.zoom;
+
+        // Keep inventory centered horizontally and 10 pixels from the top of the camera's view
+        this.inventoryBar.x = camera.midPoint.x;
+        this.inventoryBar.y = camera.worldView.y + (20 / zoomFactor);
 
         // Update the position of inventory slots as well
         const scaleFactor = 0.3; // Ensure scaleFactor matches the one used in createInventoryUI
@@ -277,6 +281,11 @@ document.addEventListener('DOMContentLoaded', function() {
             inventorySlots[i].x = slotX;
             inventorySlots[i].y = startY;
         }
+
+        // Update the graphics to keep showing the collision boxes
+        graphics.clear(); // Clear previous drawings
+        graphics.lineStyle(2, 0xff0000, 1); // Red color for debug lines
+        drawDebug(player); // Draw player's collision box
     }
 
     function createInventoryUI() {
@@ -308,8 +317,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Initialize inventory as empty
         inventory = Array(maxInventorySlots).fill(null);
     }
-    
-    
     
     function updateInventoryDisplay() {
         for (let i = 0; i < inventory.length; i++) {
