@@ -3,9 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var config = {
         type: Phaser.AUTO,
-        parent: 'game-container', // Attach the game to the container div
-        width: 800, // Fixed width for the game frame
-        height: 600, // Fixed height for the game frame
+        parent: 'game',
+        width: window.innerWidth,
+        height: window.innerHeight,
         scene: {
             preload: preload,
             create: create,
@@ -19,19 +19,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
         scale: {
-            mode: Phaser.Scale.FIT, // Scale the game to fit the available space
-            autoCenter: Phaser.Scale.CENTER_BOTH, // Center the game in the parent container
+            mode: Phaser.Scale.FIT,
+            autoCenter: Phaser.Scale.CENTER_BOTH
         }
     };
+
     var game = new Phaser.Game(config);
     var player;
     var cursors;
     var map;
     var layers = {};
     var inventory = [];
-    var inventorySlots = []; // Define inventorySlots array
     var inventoryText = [];
-    const maxInventorySlots = 10; // Define the number of inventory slots
 
     // Audio context handling
     let audioContext;
@@ -51,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
             frameWidth: 48,
             frameHeight: 48
         });
+        
 
         this.load.tilemapTiledJSON('map', 'asset/map/main_map.tmj');
 
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         this.load.image('tile_plants', 'asset/map/tileset/plants.png');
         this.load.image('items', 'asset/map/tileset/items.png');
         this.load.image('tile_well', 'asset/map/tileset/well.png');
-        this.load.image('inventory', 'asset/map/tileset/inventory.png'); // Ensure this path is correct
+        this.load.image('inventory', 'asset/map/tileset/inventory.png');
     }
 
     function create() {
@@ -94,6 +94,12 @@ document.addEventListener('DOMContentLoaded', function() {
             var picnicBasketTileset = map.addTilesetImage('picnic_basket', 'tile_picnic_basket');
             var plantTileset = map.addTilesetImage('plants', 'tile_plants');
             var wellTileset = map.addTilesetImage('well', 'tile_well');
+
+
+
+            // var caveFloorTileset = map.addTilesetImage('cave_floor', 'tile_cave_floor');
+            // var caveWallTileset = map.addTilesetImage('cave_wall', 'tile_cave_wall');
+            // var rockTileset = map.addTilesetImage('rock', 'tile_rock');
 
             console.log("Tilesets loaded:", {
                 waterTileset,
@@ -170,28 +176,33 @@ document.addEventListener('DOMContentLoaded', function() {
             player = this.physics.add.sprite(370, 430, 'player');
             player.setCollideWorldBounds(true);
             player.setDepth(5);
-            player.body.setSize(player.width * 0.15, player.height * 0.15); 
+            // Reduce the width and height to match the visible character
+            player.body.setSize(player.width * 0.2, player.height * 0.2); 
             
             console.log("Player created:", player);
 
             // Initialize Inventory
-            createInventoryUI.call(this);
+            initializeInventory.call(this);
             
             const obstaclesLayer = map.getObjectLayer('obstacles');
             if (obstaclesLayer) {
                 obstaclesLayer.objects.forEach(function(object) {
                     let { x, y, width, height } = object;
             
+                    // Adjust the origin if needed (assuming Tiled uses top-left and Phaser expects center)
                     const originAdjustmentX = width / 2; // Adjust if Phaser is using a center origin
                     const originAdjustmentY = height / 2;
             
+                    // Update x and y to account for the origin adjustment
                     x = x + originAdjustmentX;
                     y = y + originAdjustmentY;
             
+                    // Create a static body for each rectangle in the obstacles layer
                     const obstacle = this.add.rectangle(x, y, width, height);
                     this.physics.world.enable(obstacle, Phaser.Physics.Arcade.STATIC_BODY);
                     obstacle.body.setSize(width, height);
             
+                    // Add collider
                     this.physics.add.collider(player, obstacle);
                 }, this);
             }
@@ -236,8 +247,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // Set up the camera to follow the player and zoom in
             this.cameras.main.startFollow(player);
             this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-            this.cameras.main.setZoom(2);  // Adjust the zoom level as needed
+            this.cameras.main.setZoom(3);  // Adjust the zoom level as needed
 
+            // Center the camera viewport within the canvas
             var viewportWidth = config.width;
             var viewportHeight = config.height;
             this.cameras.main.setViewport(0, 0, viewportWidth, viewportHeight);
@@ -269,44 +281,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function createInventoryUI() {
         // Load and display the inventory bar
-        const inventoryBar = this.add.image(this.cameras.main.width / 2, 40, 'inventory').setScrollFactor(0);
-        inventoryBar.setOrigin(0.5, 0); // Center the bar horizontally and position it at the top
-        inventoryBar.setDepth(10); // Ensure it is rendered on top of other elements
-        
-        // Scale inventory bar to make it smaller
-        const scaleFactor = 0.5; // Adjust this value to make the bar smaller or larger
-        inventoryBar.displayWidth = this.cameras.main.width * 0.9 * scaleFactor; // Adjust scale as needed
-        inventoryBar.displayHeight = inventoryBar.height * scaleFactor; // Keep aspect ratio using scaleFactor
+        const inventoryBar = this.add.image(this.cameras.main.width / 2, this.cameras.main.height - 20, 'inventory').setScrollFactor(0);
+        inventoryBar.setOrigin(0.5, 1);  // Center the bar horizontally and position it near the bottom
+        inventoryBar.setDepth(10);  // Ensure it is rendered on top of other elements
     
         // Define the slot size and position within the inventory bar
-        const slotSize = 32 * scaleFactor; // Scale down the slot size
-        const padding = 10 * scaleFactor; // Scale down the padding
-        const startX = inventoryBar.x - (inventoryBar.displayWidth / 2) + slotSize / 2 + 8; // Start position for slots
-        const startY = inventoryBar.y + inventoryBar.displayHeight / 2;
+        const slotSize = 32;  // Size of each slot inside the inventory bar
+        const padding = 10;  // Padding between slots
+        const startX = inventoryBar.x - (inventoryBar.width / 2) + slotSize / 2 + 8;  // Start position for slots
+        const startY = inventoryBar.y - inventoryBar.height / 2;
     
         // Create inventory slots
         for (let i = 0; i < maxInventorySlots; i++) {
             const slotX = startX + i * (slotSize + padding);
-            const slot = this.add.image(slotX, startY, null).setScrollFactor(0); // Empty slot to place items
+            const slot = this.add.image(slotX, startY, null).setScrollFactor(0);  // Empty slot to place items
             slot.setDisplaySize(slotSize, slotSize);
-            slot.setDepth(11); // Ensure items are rendered on top of the inventory bar
+            slot.setDepth(11);  // Ensure items are rendered on top of the inventory bar
             inventorySlots.push(slot);
         }
-        
+    
         // Initialize inventory as empty
         inventory = Array(maxInventorySlots).fill(null);
     }
     
-    
     function updateInventoryDisplay() {
         for (let i = 0; i < inventory.length; i++) {
             if (inventory[i]) {
+                // If there's an item, display it in the corresponding slot
                 let itemImage = this.add.image(inventorySlots[i].x, inventorySlots[i].y, inventory[i].key).setScrollFactor(0);
-                itemImage.setDisplaySize(32, 32);  
-                itemImage.setDepth(12);  
+                itemImage.setDisplaySize(32, 32);  // Adjust size to fit within each slot
+                itemImage.setDepth(12);  // Ensure the item is rendered on top of the slot
             } else {
-                inventorySlots[i].setTexture(null);  
+                // If no item, ensure the slot is empty
+                inventorySlots[i].setTexture(null);  // Clear the slot
             }
         }
     }
+    
 });
