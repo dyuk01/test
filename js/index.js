@@ -290,6 +290,10 @@ document.addEventListener('DOMContentLoaded', function() {
         this.inventoryBar.displayWidth = (this.cameras.main.width * scaleFactor) / 3; // Adjust scale as needed
         this.inventoryBar.displayHeight = this.inventoryBar.height * scaleFactor; // Keep aspect ratio using scaleFactor
         
+        // Initial position relative to the camera's top-middle point
+        this.inventoryBar.x = this.cameras.main.scrollX + this.cameras.main.width / 2;
+        this.inventoryBar.y = this.cameras.main.scrollY + 20;  // 20 pixels from the top
+        
         // Define the slot size and position within the inventory bar
         const slotSize = 32 * scaleFactor; // Scale down the slot size
         const padding = 5 * scaleFactor; // Scale down the padding
