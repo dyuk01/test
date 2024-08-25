@@ -3,9 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var config = {
         type: Phaser.AUTO,
-        parent: 'game',
-        width: window.innerWidth,
-        height: window.innerHeight,
+        parent: 'game-container', // Attach the game to the container div
+        width: 800, // Fixed width for the game frame
+        height: 600, // Fixed height for the game frame
         scene: {
             preload: preload,
             create: create,
@@ -19,11 +19,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
         scale: {
-            mode: Phaser.Scale.FIT,
-            autoCenter: Phaser.Scale.CENTER_BOTH
+            mode: Phaser.Scale.FIT, // Scale the game to fit the available space
+            autoCenter: Phaser.Scale.CENTER_BOTH, // Center the game in the parent container
         }
     };
-
     var game = new Phaser.Game(config);
     var player;
     var cursors;
