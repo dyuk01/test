@@ -297,14 +297,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function createInventoryUI() {
         // Load and display the inventory bar
-        const inventoryBar = this.add.image(this.cameras.main.width / 2, 10, 'inventory').setScrollFactor(0);
+        const inventoryBar = this.add.image(0, 0, 'inventory').setScrollFactor(0);
         inventoryBar.setOrigin(0.5, 0); // Center the bar horizontally and align to the top
         inventoryBar.setDepth(10); // Ensure it is rendered on top of other elements
-        
+    
         // Scale inventory bar to fit the screen width
-        const scaleFactor = 0.5; // Adjust this value to make the bar smaller or larger
-        inventoryBar.displayWidth = this.cameras.main.width * 0.9 * scaleFactor; // Adjust scale as needed
+        const scaleFactor = 0.3; // Adjust this value to make the bar smaller
+        inventoryBar.displayWidth = this.cameras.main.width * scaleFactor; // Adjust scale as needed
         inventoryBar.displayHeight = inventoryBar.height * scaleFactor; // Keep aspect ratio using scaleFactor
+    
+        // Position the inventory bar relative to the camera
+        this.cameras.main.ignore(inventoryBar); // Ignore this object for camera panning
+        inventoryBar.x = this.cameras.main.midPoint.x; // Center horizontally based on camera
+        inventoryBar.y = this.cameras.main.worldView.y + 10; // Position it slightly below the top of the view
     
         // Define the slot size and position within the inventory bar
         const slotSize = 32 * scaleFactor; // Scale down the slot size
@@ -320,10 +325,11 @@ document.addEventListener('DOMContentLoaded', function() {
             slot.setDepth(11); // Ensure items are rendered on top of the inventory bar
             inventorySlots.push(slot);
         }
-        
+    
         // Initialize inventory as empty
         inventory = Array(maxInventorySlots).fill(null);
     }
+    
     
     function updateInventoryDisplay() {
         for (let i = 0; i < inventory.length; i++) {
