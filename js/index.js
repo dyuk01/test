@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Keep inventory centered horizontally and 10 pixels from the top of the camera's view
         this.inventoryBar.x = camera.midPoint.x;
-        this.inventoryBar.y = camera.worldView.y;
+        this.inventoryBar.y = camera.midPoint.y;
 
         // Update the position of inventory slots as well
         const scaleFactor = 0.3; // Ensure scaleFactor matches the one used in createInventoryUI
