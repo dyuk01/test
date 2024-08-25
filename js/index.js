@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var config = {
         type: Phaser.AUTO,
         parent: 'game',
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: 800,
+        height: 1200,
         scene: {
             preload: preload,
             create: create,
@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var inventorySlots = []; // Define inventorySlots array
     var inventoryText = [];
     const maxInventorySlots = 10; // Define the number of inventory slots
+    var graphics;
 
     // Audio context handling
     let audioContext;
@@ -171,12 +172,20 @@ document.addEventListener('DOMContentLoaded', function() {
             player = this.physics.add.sprite(370, 430, 'player');
             player.setCollideWorldBounds(true);
             player.setDepth(5);
-            player.body.setSize(player.width * 0.25, player.height * 0.25); 
+            player.body.setSize(player.width * 0.2, player.height * 0.2); 
             
             console.log("Player created:", player);
 
             // Initialize Inventory
             createInventoryUI.call(this);
+
+            // Initialize Graphics for debugging
+            graphics = this.add.graphics();
+            graphics.lineStyle(2, 0xff0000, 1); // Red color for debug lines
+
+            // Draw the player's collision box
+            drawDebug(player);
+            
             
             const obstaclesLayer = map.getObjectLayer('obstacles');
             if (obstaclesLayer) {
