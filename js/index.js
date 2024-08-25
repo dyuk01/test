@@ -186,6 +186,8 @@ document.addEventListener('DOMContentLoaded', function() {
             uiCamera.ignore(layers['well']);
             uiCamera.ignore(layers['mine']);
             uiCamera.ignore(layers['furniture']);
+            uiCamera.ignore(player);
+
 
             
             // Initialize Inventory
