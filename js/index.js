@@ -203,6 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     obstacle.body.setSize(width, height);
             
                     this.physics.add.collider(player, obstacle);
+                    drawDebug(obstacle);
                 }, this);
             }
 
@@ -274,6 +275,23 @@ document.addEventListener('DOMContentLoaded', function() {
             player.anims.play('moveSouth', true);
         } else {
             player.anims.stop();
+        }
+
+        // Update the graphics to keep showing the collision boxes
+        graphics.clear(); // Clear previous drawings
+        graphics.lineStyle(2, 0xff0000, 1); // Red color for debug lines
+        drawDebug(player); // Draw player's collision box
+        // Optionally, draw more debug lines here as needed
+    }
+
+    function drawDebug(gameObject) {
+        if (gameObject.body) {
+            graphics.strokeRect(
+                gameObject.body.x,
+                gameObject.body.y,
+                gameObject.body.width,
+                gameObject.body.height
+            );
         }
     }
 
