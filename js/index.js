@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var inventorySlots = []; // Define inventorySlots array
     var inventoryText = [];
     const maxInventorySlots = 10; // Define the number of inventory slots
-    var graphics;
 
     function preload() {
         console.log("preload");
@@ -167,10 +166,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Initialize Inventory
             createInventoryUI.call(this);
-
-            // Initialize Graphics for debugging
-            graphics = this.add.graphics();
-            graphics.lineStyle(2, 0xff0000, 1); // Red color for debug lines
             
             const obstaclesLayer = map.getObjectLayer('obstacles');
             if (obstaclesLayer) {
@@ -281,11 +276,6 @@ document.addEventListener('DOMContentLoaded', function() {
             inventorySlots[i].x = slotX;
             inventorySlots[i].y = startY;
         }
-
-        // Update the graphics to keep showing the collision boxes
-        graphics.clear(); // Clear previous drawings
-        graphics.lineStyle(2, 0xff0000, 1); // Red color for debug lines
-        drawDebug(player); // Draw player's collision box
     }
 
     function createInventoryUI() {
