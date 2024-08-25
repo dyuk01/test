@@ -188,8 +188,6 @@ document.addEventListener('DOMContentLoaded', function() {
             uiCamera.ignore(layers['furniture']);
             uiCamera.ignore(player);
 
-
-            
             // Initialize Inventory
             createInventoryUI.call(this, uiCamera);
             
@@ -279,7 +277,6 @@ document.addEventListener('DOMContentLoaded', function() {
         inventoryBar = this.add.image(400, 40, 'inventory'); // Position at top middle
         inventoryBar.setOrigin(0.5, 0); // Center the bar horizontally
         inventoryBar.setDepth(10); // Ensure it is rendered on top of other elements
-        uiCamera.ignore(inventoryBar); // Tell the main camera to ignore this element
         
         // Scale inventory bar to fit the screen width
         const scaleFactor = 0.7; // Adjust this value to make the bar smaller
@@ -299,7 +296,6 @@ document.addEventListener('DOMContentLoaded', function() {
             slot.setDisplaySize(slotSize, slotSize);
             slot.setDepth(11); // Ensure items are rendered on top of the inventory bar
             inventorySlots.push(slot);
-            uiCamera.ignore(slot); // Tell the main camera to ignore this element
         }
         
         // Initialize inventory as empty
