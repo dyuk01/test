@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Set up the camera to follow the player and zoom in
             this.cameras.main.startFollow(player);
             this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-            // this.cameras.main.setZoom(2.75);  // Adjust the zoom level as needed
+            this.cameras.main.setZoom(2.75);  // Adjust the zoom level as needed
 
             var viewportWidth = config.width;
             var viewportHeight = config.height;
