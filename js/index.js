@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Keep inventory centered horizontally and 10 pixels from the top of the camera's view
         this.inventoryBar.x = camera.midPoint.x;
-        this.inventoryBar.y = camera.worldView.y + (20 / zoomFactor);
+        this.inventoryBar.y = camera.worldView.y;
 
         // Update the position of inventory slots as well
         const scaleFactor = 0.3; // Ensure scaleFactor matches the one used in createInventoryUI
@@ -287,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Scale inventory bar to fit the screen width
         const scaleFactor = 0.3; // Adjust this value to make the bar smaller
-        this.inventoryBar.displayWidth = this.cameras.main.width * scaleFactor; // Adjust scale as needed
+        this.inventoryBar.displayWidth = (this.cameras.main.width * scaleFactor) / 2; // Adjust scale as needed
         this.inventoryBar.displayHeight = this.inventoryBar.height * scaleFactor; // Keep aspect ratio using scaleFactor
         
         // Define the slot size and position within the inventory bar
