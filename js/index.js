@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', function() {
         this.inventoryBar.y = camera.worldView.y + (camera.height / 2) / zoomFactor - this.inventoryBar.displayHeight - 10;
 
         // Update the position of inventory slots as well
-        const scaleFactor = 0.3; // Ensure scaleFactor matches the one used in createInventoryUI
+        const scaleFactor = 0.2; // Ensure scaleFactor matches the one used in createInventoryUI
         const slotSize = 32 * scaleFactor;
         const padding = 10 * scaleFactor;
         const startX = this.inventoryBar.x - (this.inventoryBar.displayWidth / 2) + slotSize / 2 + 6; // Start position for slots
