@@ -275,41 +275,38 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update the inventory bar position relative to the camera
         this.inventoryBar.x = this.cameras.main.midPoint.x; // Keep inventory centered horizontally
         this.inventoryBar.y = this.cameras.main.worldView.y + 10; // Keep it 10 pixels from the top of the camera's view
-    }
 
-    function drawDebug(gameObject) {
-        if (gameObject.body) {
-            graphics.strokeRect(
-                gameObject.body.x,
-                gameObject.body.y,
-                gameObject.body.width,
-                gameObject.body.height
-            );
+        // Update the position of inventory slots as well
+        const scaleFactor = 0.3; // Ensure scaleFactor matches the one used in createInventoryUI
+        const slotSize = 32 * scaleFactor;
+        const padding = 10 * scaleFactor;
+        const startX = this.inventoryBar.x - (this.inventoryBar.displayWidth / 2) + slotSize / 2 + 8; // Start position for slots
+        const startY = this.inventoryBar.y + this.inventoryBar.displayHeight / 2;
+        
+        for (let i = 0; i < inventorySlots.length; i++) {
+            const slotX = startX + i * (slotSize + padding);
+            inventorySlots[i].x = slotX;
+            inventorySlots[i].y = startY;
         }
     }
 
     function createInventoryUI() {
         // Create the inventory bar
-        const inventoryBar = this.add.image(0, 0, 'inventory').setScrollFactor(0);
-        inventoryBar.setOrigin(0.5, 0); // Center the bar horizontally and align to the top
-        inventoryBar.setDepth(10); // Ensure it is rendered on top of other elements
-    
+        this.inventoryBar = this.add.image(0, 0, 'inventory').setScrollFactor(0);
+        this.inventoryBar.setOrigin(0.5, 0); // Center the bar horizontally and align to the top
+        this.inventoryBar.setDepth(10); // Ensure it is rendered on top of other elements
+        
         // Scale inventory bar to fit the screen width
         const scaleFactor = 0.3; // Adjust this value to make the bar smaller
-        inventoryBar.displayWidth = this.cameras.main.width * scaleFactor; // Adjust scale as needed
-        inventoryBar.displayHeight = inventoryBar.height * scaleFactor; // Keep aspect ratio using scaleFactor
-    
-        // Position the inventory bar relative to the camera
-        this.cameras.main.ignore(inventoryBar); // Ignore this object for camera panning
-        inventoryBar.x = this.cameras.main.midPoint.x; // Center horizontally based on camera
-        inventoryBar.y = this.cameras.main.worldView.y + 10; // Position it slightly below the top of the view
-    
+        this.inventoryBar.displayWidth = this.cameras.main.width * scaleFactor; // Adjust scale as needed
+        this.inventoryBar.displayHeight = this.inventoryBar.height * scaleFactor; // Keep aspect ratio using scaleFactor
+        
         // Define the slot size and position within the inventory bar
         const slotSize = 32 * scaleFactor; // Scale down the slot size
         const padding = 10 * scaleFactor; // Scale down the padding
-        const startX = inventoryBar.x - (inventoryBar.displayWidth / 2) + slotSize / 2 + 8; // Start position for slots
-        const startY = inventoryBar.y + inventoryBar.displayHeight / 2;
-    
+        const startX = this.inventoryBar.x - (this.inventoryBar.displayWidth / 2) + slotSize / 2 + 8; // Start position for slots
+        const startY = this.inventoryBar.y + this.inventoryBar.displayHeight / 2;
+        
         // Create inventory slots
         for (let i = 0; i < maxInventorySlots; i++) {
             const slotX = startX + i * (slotSize + padding);
@@ -318,13 +315,11 @@ document.addEventListener('DOMContentLoaded', function() {
             slot.setDepth(11); // Ensure items are rendered on top of the inventory bar
             inventorySlots.push(slot);
         }
-    
-        // Store the inventory bar as a reference for updating
-        this.inventoryBar = inventoryBar;
-    
+        
         // Initialize inventory as empty
         inventory = Array(maxInventorySlots).fill(null);
     }
+    
     
     
     function updateInventoryDisplay() {
