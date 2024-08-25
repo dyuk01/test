@@ -269,7 +269,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const scaleFactor = 0.3; // Ensure scaleFactor matches the one used in createInventoryUI
         const slotSize = 32 * scaleFactor;
         const padding = 10 * scaleFactor;
-        const startX = this.inventoryBar.x - (this.inventoryBar.displayWidth / 2) + slotSize / 2; // Start position for slots
+        const startX = this.inventoryBar.x - (this.inventoryBar.displayWidth / 2) + slotSize / 2 + 4; // Start position for slots
         const startY = this.inventoryBar.y + this.inventoryBar.displayHeight / 2;
         
         for (let i = 0; i < inventorySlots.length; i++) {
