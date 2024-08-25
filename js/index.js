@@ -279,13 +279,13 @@ document.addEventListener('DOMContentLoaded', function() {
         inventoryBar.setDepth(10); // Ensure it is rendered on top of other elements
         
         // Scale inventory bar to fit the screen width
-        const scaleFactor = 1; // Adjust this value to make the bar smaller
+        const scaleFactor = 1.5; // Adjust this value to make the bar smaller
         inventoryBar.displayWidth = (this.cameras.main.width * scaleFactor) / 3; // Adjust scale as needed
         inventoryBar.displayHeight = inventoryBar.height * scaleFactor; // Keep aspect ratio using scaleFactor
         
         // Define the slot size and position within the inventory bar
-        const slotSize = 32 * scaleFactor; // Scale down the slot size
-        const padding = 4 * scaleFactor; // Scale down the padding
+        const slotSize = 16 * scaleFactor; // Scale down the slot size
+        const padding = 3 * scaleFactor; // Scale down the padding
         const startX = inventoryBar.x - (inventoryBar.displayWidth / 2) + slotSize / 2; // Start position for slots
         const startY = inventoryBar.y + inventoryBar.displayHeight / 2;
         
