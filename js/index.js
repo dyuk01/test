@@ -35,17 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const maxInventorySlots = 10; // Define the number of inventory slots
     var graphics;
 
-    // Audio context handling
-    let audioContext;
-
-    function resumeAudioContext() {
-        if (audioContext.state === 'suspended') {
-            audioContext.resume().then(() => {
-                console.log('AudioContext resumed');
-            });
-        }
-    }
-
     function preload() {
         console.log("preload");
 
