@@ -1924,17 +1924,6 @@
                  "width":6.38343,
                  "x":308.887155841904,
                  "y":404.993262577488
-                }, 
-                {
-                 "height":14.5853,
-                 "id":134,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":24.6442,
-                 "x":452.29512726819,
-                 "y":494.753462386466
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2146,15 +2135,15 @@
          "name":"well",
          "objects":[
                 {
-                 "height":14.5853241462556,
-                 "id":130,
+                 "height":14.5853,
+                 "id":136,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":24.6441683850526,
-                 "x":450.642106321984,
-                 "y":494.386309912991
+                 "width":24.6442,
+                 "x":450.797971863459,
+                 "y":493.755358783312
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2229,7 +2218,7 @@
          "y":0
         }],
  "nextlayerid":35,
- "nextobjectid":135,
+ "nextobjectid":137,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",
