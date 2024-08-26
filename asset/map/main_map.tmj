@@ -2133,18 +2133,7 @@
          "draworder":"topdown",
          "id":30,
          "name":"well",
-         "objects":[
-                {
-                 "height":14.5853,
-                 "id":136,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":24.6442,
-                 "x":450.797971863459,
-                 "y":493.755358783312
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
