@@ -169,6 +169,8 @@ document.addEventListener('DOMContentLoaded', function() {
             this.cameras.main.startFollow(player);
             this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
             this.cameras.main.setZoom(3);  // Adjust the zoom level as needed
+            this.cameras.main.ignore(inventoryBar);
+            this.cameras.main.ignore(slot);
 
             // Create UI Camera
             const uiCamera = this.cameras.add(0, 0, 800, 1200).setZoom(1);
