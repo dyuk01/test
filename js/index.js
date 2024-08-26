@@ -297,8 +297,6 @@ document.addEventListener('DOMContentLoaded', function() {
             slot.setDepth(11); // Ensure items are rendered on top of the inventory bar
             inventorySlots.push(slot);
         }
-        this.cameras.main.ignore(inventoryBar);
-        this.cameras.main.ignore(slot);
         
         // Initialize inventory as empty
         inventory = Array(maxInventorySlots).fill(null);
